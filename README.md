@@ -1,1 +1,1 @@
-# Note-taking-application
+# Notes-taking-application
