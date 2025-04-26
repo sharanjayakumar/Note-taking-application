@@ -1,3 +1,37 @@
+.l
+{
+  text-align: center;
+  background-image: url(./Assets/login.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height:742px;
+  margin-top: 0px;
+}
+.ll
+{
+  padding-top: 350px;
+  margin-top: 0%;
+  height: 100px;
+  width: 100px;
+}
+.lib
+{
+  border-radius: 15px;
+  background-color: peru;
+  height: 30px;
+  width: 80px;
+}
+.lfb
+{
+  background-color: red;
+  border-radius: 15px;
+  color: orange;
+  height: 30px;
+}
+.lb
+{
+  margin-left: 150px;
+}
 .Login{
   background-image:url("./Assets/loginimage.jpg");
   background-repeat: no-repeat;
@@ -112,5 +146,3 @@ textarea {
 .radio-group input {
   margin-right: 5px;
 }
-
-
