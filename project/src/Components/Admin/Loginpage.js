@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 function Loginpage() {
   const [user, setAdmin] = useState('');
   const [pass, setPass] = useState('');
   const navigate = useNavigate();
-
+  const login= async()=>{
+    axios.post("http://localhost:3000/admin-login",{
+      username:user,
+      password:pass
+    }).then((res)=>{
+      if(res.data)
+      {
+        navigate('/admin-dashboard')
+      }
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
   const validate = (e) => {
     e.preventDefault();
 
@@ -20,7 +34,9 @@ function Loginpage() {
       navigate('/admin-dashboard'); 
     } else {
       alert('Invalid credentials');
-    }
+    }   
+
+    login()
   };
 
   return (
@@ -60,5 +76,4 @@ function Loginpage() {
     </div>
   );
 }
-
 export default Loginpage;
