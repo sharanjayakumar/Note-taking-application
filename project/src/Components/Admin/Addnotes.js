@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Addnotes() {
     const [data, setDatas] = useState({ title: "", subtitle: "", category: "", desc: "" });
@@ -76,7 +77,7 @@ function Addnotes() {
                     ></textarea>
                     <div class="button-group">
                         <button type="submit" class="bttn">ADD</button>
-                        <button type="submit" class="bttns">CANCEL</button>
+                        <button type="submit" class="bttns"><Link></Link>CANCEL</button>
                     </div>
 
                 </form>
