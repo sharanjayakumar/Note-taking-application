@@ -1,32 +1,46 @@
 import React from 'react';
 import img from '../../Assets/userlogologin.JPG';
-import Link from "react-router-dom";
+import {Link} from "react-router-dom";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import
 function Login() {
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/ForgotPassword" element={<ForgotPassword />} />
-    </Routes>
+   
     <div className='l'>
-        <img src={img} className='ll' alt='User Login Logo'></img>
-        <br/>
-        <form>
-            <label>USERNAME </label>
-            <input style={{marginLeft:'50px'}} type="text" name="id" />
-            <br/><br/>
-            <label>PASSWORD </label>
-            <input style={{marginLeft:'50px'}} type="password" name="password" />
-            <br/><br/>
-            <button className='lib' type="submit">LOGIN</button>
-            <br/>
-            <button className='lfb' onClick={<Link to = '/Forgotpassword'></Link>}>FORGOT PASSWORD</button>
-            <a href='#' className='lb'>CREATE NEW ACCOUNT?</a>
-        </form>
+      <form style={{marginLeft:'100px'}} className='form_login my-5'>
+        <h3>USER</h3><br />
+        <div className="row mb-3 align-items-center">
+          <label htmlFor="user" className="col-3 col-form-label">Username:-</label>
+          <div className="col-8">
+            <input
+              type="text"
+              id="user"
+              className="form-control"
+              
+              placeholder="Enter username"
+            />
+          </div>
+        </div>
+        <div className="row mb-3 align-items-center">
+          <label htmlFor="pass" className="col-3 col-form-label">Password :-</label>
+          <div className="col-8">
+            <input
+              type="password"
+              id="pass"
+              className="form-control"
+              placeholder="Enter password"
+            />
+          </div>
+        </div>
+        <center>
+          <button className="butn" type="submit">LOGIN</button>
+        </center>
+        <div className='row'>
+          <a className=' col-6' onClick={<Link to = '/Forgotpassword' ></Link>}>FORGOT PASSWORD</a>
+          <a href='#' className=' col-6'>CREATE NEW ACCOUNT?</a>
+        </div>
+        
+      </form>
     </div>
-    </BrowserRouter>
   )
 }
 
