@@ -32,3 +32,117 @@
 {
   margin-left: 150px;
 }
+.Login{
+  background-image:url("./Assets/loginimage.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+  height:600px;
+  
+}
+.form_login{
+  height:290px;
+  width:500px;
+  text-align: center;
+  position: absolute;
+  left:400px;
+  top:280px;
+  border:2px solid grey;
+ 
+}
+.login_input{
+  height:20px;
+  margin-left:20px;
+  border:2px white;
+  background-color: transparent;
+  
+
+}
+
+label{
+  
+  font-style: bold;
+  float: left;
+}
+.butn{
+  border:none;
+  border-radius:25px;
+  font-style:bold;
+  background-color:rgb(224, 179, 95);
+  padding:10px;
+  width:70px;
+ 
+}
+.dash{
+  width: 270px;
+  height: 100vh;
+  color: white;
+  padding: 20px;
+  position:fixed;
+  text-align: center;
+  background-color: black;
+}
+li{
+  list-style-type: none;
+  padding-bottom: 30px;
+  color:white;
+  text-align: left;
+ 
+}
+.Dashboard{
+  display: flex;
+  height: 100vh;
+  background: url("./Assets/note.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.card-img-top{
+  height:300px;
+}
+.container {
+  width: 40%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+label {
+  font-weight: bold;
+}
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  height: 100px;
+}
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.bttn, .bttns {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  background-color: blue;
+  border-radius: 25px;
+}
+.radio-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap; 
+}
+.radio-group input {
+  margin-right: 5px;
+}
