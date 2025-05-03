@@ -81,9 +81,9 @@ label{
   text-align: center;
   background-color: black;
 }
-li{
+.dashb{
   list-style-type: none;
-  padding-bottom: 30px;
+  padding-bottom:20px;
   color:white;
   text-align: left;
  
@@ -145,4 +145,7 @@ textarea {
 }
 .radio-group input {
   margin-right: 5px;
+}
+.cat{
+  padding-top:5px;
 }
