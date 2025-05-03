@@ -10,10 +10,12 @@ function Loginpage() {
     axios.post("http://localhost:3000/admin-login",{
       username:user,
       password:pass
-    }).then((res)=>{
+    }).then((res)=>{ 
       if(res.data)
       {
+        console.log(res.data)
         navigate('/admin-dashboard')
+        localStorage.setItem("token",res.data)
       }
     })
     .catch((err)=>{
@@ -31,12 +33,12 @@ function Loginpage() {
     } else if (pass === '') {
       alert('Enter password');
     } else if (user === adminUsername && pass === adminPassword) {
-      navigate('/admin-dashboard'); 
+      login()
     } else {
       alert('Invalid credentials');
     }   
 
-    login()
+    
   };
 
   return (

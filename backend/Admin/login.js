@@ -1,7 +1,7 @@
 const express=require("express")
 const router=express.Router()
 const jwt=require("jsonwebtoken")
-router.post("/adminlogin",async (req,res)=>{
+router.post("/admin-login",async (req,res)=>{
     if(req.body.username=="admin" && req.body.password=="admin123")
     {
         const token=jwt.sign({username:req.body.username,password:req.body.password},process.env.JWT_KEY)
