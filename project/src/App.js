@@ -7,16 +7,12 @@ import Viewnotes from './Components/Admin/Viewnotes';
 import Addnotes from './Components/Admin/Addnotes';
 import Forgotpass from './Components/User/Forgotpass';
 import Createacc from './Components/User/Createacc';
->>>>>>> 845334f (User changes commit)
-=======
 import Login from './Components/User/Login';
 import Navbar from './Components/Admin/Navbar';
 import Forgotpass from './Components/User/Forgotpass';
 import Createacc from './Components/User/Createacc';
-=======
 import Forgotpass from './Components/User/Forgotpass';
 import Createacc from './Components/User/Createacc';
->>>>>>> 845334f (User changes commit)
 
 function App() {
   return (
@@ -24,8 +20,6 @@ function App() {
     <div className="App">
         <Route path='/forgot' element={<Forgotpass/>}></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
->>>>>>> 845334f (User changes commit)
-=======
       <Routes>
         <Route path="/login"  element={<Login/>}></Route>
         <Route path='/admin-login' element={<Loginpage/>}></Route>
@@ -35,11 +29,8 @@ function App() {
         <Route path='/navbar' element={<Navbar/>} ></Route>
         <Route path='/forgot' element={<Forgotpass/>}></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
-=======
         <Route path='/forgot' element={<Forgotpass/>}></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
->>>>>>> 845334f (User changes commit)
-
       </Routes>
       
     </div>
