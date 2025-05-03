@@ -51,7 +51,7 @@ router.post("/userlogin/verify", async (req, res) => {
                 console.log(err)
             }
             if (result) {
-                const token = jwt.sign({ username: user.username, id: user._id }, process.env.JWT_KEY);
+                const token = jwt.sign({ username: user.username, id: user._id ,role: user.role}, process.env.JWT_KEY);
                 res.send({ token })
             }
             else {
