@@ -6,6 +6,8 @@ const loginRouter=require("./Admin/login")
 const putRouter=require("./putController")
 const dotenv=require("dotenv")
 const cors=require("cors")
+const userLogin=require("./User/login")
+const usernote=require("./User/userlogin")
 
 dotenv.config()
 const app=express()
@@ -15,6 +17,8 @@ app.use(loginRouter)
 app.use(getRouter)
 app.use(postRouter)
 app.use(putRouter)
+app.use(userLogin)
+app.use(usernote)
 app.listen(3000,()=>{
     console.log("Server running at port 3000");
 })
