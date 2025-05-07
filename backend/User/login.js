@@ -49,6 +49,7 @@ router.post("/userlogin/verify", async (req, res) => {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
             if (err) {
                 console.log(err)
+                res.status(400).json({error:"error"})
             }
             if (result) {
                 const token = jwt.sign({ username: user.username, id: user._id ,role: user.role}, process.env.JWT_KEY);

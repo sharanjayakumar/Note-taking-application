@@ -7,6 +7,7 @@ import Viewnotes from './Components/Admin/Viewnotes';
 import Addnotes from './Components/Admin/Addnotes';
 import Login from './Components/User/Login';
 import Navbar from './Components/Admin/Navbar';
+import Viewusers from './Components/Admin/Viewusers';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/admin-dashboard' element={<Dashboard/>} ></Route>
         <Route path='/viewnote' element={<Viewnotes/>} ></Route>
         <Route path='/addnote' element={<Addnotes/>} ></Route>
+        <Route path='/viewuser' element={<Viewusers/>} ></Route>
         <Route path='/navbar' element={<Navbar/>} ></Route>
 
       </Routes>
