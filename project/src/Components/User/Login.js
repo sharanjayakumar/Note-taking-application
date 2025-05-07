@@ -36,7 +36,7 @@ function Login() {
         </center>
         <div className='row'>
           <a className=' col-6' onClick={<Link to = '/Forgotpassword' ></Link>}>FORGOT PASSWORD</a>
-          <a href='#' className=' col-6'>CREATE NEW ACCOUNT?</a>
+          <a href='#' className=' col-6'>CREATE NEW ACCOUNT?</a>
         </div>
         
       </form>

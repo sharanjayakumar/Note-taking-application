@@ -29,7 +29,9 @@ router.post("/userlogin/register", [
         const hash = await bcrypt.hash(req.body.password, 10);
         const login = new userlogin({
             username: req.body.username,
-            password: hash
+            password: hash,
+            phno:req.body.phno,
+            email:req.body.email
         });
 
         await login.save();
