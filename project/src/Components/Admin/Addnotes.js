@@ -39,7 +39,7 @@ function Addnotes() {
       <center><h1>ADD NOTES</h1></center>
       <br />
       <div className="container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form1">
           <label htmlFor="title">TITLE:</label>
           <input
             type="text"

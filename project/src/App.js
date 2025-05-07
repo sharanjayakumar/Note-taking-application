@@ -9,6 +9,10 @@ import Forgotpass from './Components/User/Forgotpass';
 import Createacc from './Components/User/Createacc';
 import Login from './Components/User/Login';
 import Navbar from './Components/Admin/Navbar';
+import Viewusers from './Components/Admin/Viewusers';
+
+
+
 
 function App() {
   return (
@@ -20,6 +24,7 @@ function App() {
         <Route path='/admin-dashboard' element={<Dashboard/>} ></Route>
         <Route path='/viewnote' element={<Viewnotes/>} ></Route>
         <Route path='/addnote' element={<Addnotes/>} ></Route>
+        <Route path='/viewuser' element={<Viewusers/>} ></Route>
         <Route path='/navbar' element={<Navbar/>} ></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
         <Route path='/forgot' element={<Forgotpass/>}></Route>
