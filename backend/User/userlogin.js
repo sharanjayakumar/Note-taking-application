@@ -16,7 +16,7 @@ router.get("/user",async(req,res)=>{
     console.log(data.username)
     console.log(data.id)
     try{
-        const note=notes.find({user:data.id}).exec()
+        const note=await notes.find({user:data.id}).exec()
         res.json(note)
     }
     catch (err) {
@@ -46,5 +46,21 @@ router.post("/useradd",async(req,res)=>{
         {
             res.send({message:"error"})
         }
+});
+router.put("/user-editnote/:id",async (req,res)=>{
+    const cid=req.params.id;
+    let value=await notes.findByIdAndUpdate(cid,{title:req.body.title,subtitle:req.body.subtitle,category:req.body.category,description:req.body.description})
+    res.send(value)
 })
+router.delete("/deletenote/:id",async (req,res)=>{
+    try{
+        const del=await notes.deleteOne({_id:req.params.id}).exec()
+        res.send(del)
+    }
+    catch(err)
+    {
+        res.send(err)
+    }
+})
+
 module.exports=router;
