@@ -5,9 +5,14 @@ import Loginpage from './Components/Admin/Loginpage';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Viewnotes from './Components/Admin/Viewnotes';
 import Addnotes from './Components/Admin/Addnotes';
+import Forgotpass from './Components/User/Forgotpass';
+import Createacc from './Components/User/Createacc';
 import Login from './Components/User/Login';
 import Navbar from './Components/Admin/Navbar';
 import Viewusers from './Components/Admin/Viewusers';
+
+
+
 
 function App() {
   return (
@@ -21,7 +26,8 @@ function App() {
         <Route path='/addnote' element={<Addnotes/>} ></Route>
         <Route path='/viewuser' element={<Viewusers/>} ></Route>
         <Route path='/navbar' element={<Navbar/>} ></Route>
-
+        <Route path='/forgot' element={<Forgotpass/>}></Route>
+        <Route path='/create_account' element={<Createacc/>}></Route>
       </Routes>
       
     </div>
