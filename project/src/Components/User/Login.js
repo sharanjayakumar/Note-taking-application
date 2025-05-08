@@ -1,12 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import img from '../../Assets/userlogologin.JPG';
-import {Link} from "react-router-dom";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 function Login() {
+  const [user, setUserName] = useState('')
+  const [pwd, setPassword] = useState('')
+  const navigate = useNavigate()
+  const validate = (e) => {
+    e.preventDefault();
+    if (user === '') {
+      alert('Enter username')
+    }
+    else if (pwd === '') {
+      alert('Enter password')
+    }
+    else {
+      const userlogin = async () => {
+        axios.post("http://localhost:3000/userlogin/verify", {
+          username: user, password: pwd
+        }).then((res) => {
+          if (res.data) {
+            console.log(res.data)
+            navigate('/admin-dashboard')
+            localStorage.setItem("token", res.data)
+          }
+          
+          
+        })
+          .catch((err) => {
+            console.log(err)
+            if(err.status==400)
+            {
+              alert("Invalid credentials")
+            }
+          });
+      }
+      userlogin();
+    }
+    
+  }
   return (
-   
     <div className='l'>
-      <form style={{marginLeft:'100px'}} className='form_login my-5'>
+      <form style={{ marginLeft: '100px' }} className='form_login my-5' onSubmit={validate}>
         <h3>USER</h3><br />
         <div className="row mb-3 align-items-center">
           <label htmlFor="user" className="col-3 col-form-label">Username:-</label>
@@ -15,8 +50,11 @@ function Login() {
               type="text"
               id="user"
               className="form-control"
-              
+              value={user}
               placeholder="Enter username"
+              onChange={(e) =>
+                setUserName(e.target.value)
+              }
             />
           </div>
         </div>
@@ -28,6 +66,9 @@ function Login() {
               id="pass"
               className="form-control"
               placeholder="Enter password"
+              value={pwd}
+              onChange={(e) =>
+                setPassword(e.target.value)}
             />
           </div>
         </div>
@@ -35,10 +76,10 @@ function Login() {
           <button className="butn" type="submit">LOGIN</button>
         </center>
         <div className='row'>
-          <a className=' col-6' onClick={<Link to = '/Forgotpassword' ></Link>}>FORGOT PASSWORD</a>
-          <a href='#' className=' col-6'>CREATE NEW ACCOUNT?</a>
+          <Link to='/Forgotpassword' className='col-6'>FORGOT PASSWORD</Link>
+          <Link to='/register' className='col-6'>CREATE NEW ACCOUNT?</Link>
         </div>
-        
+
       </form>
     </div>
   )

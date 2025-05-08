@@ -49,7 +49,7 @@ router.post("/useradd",async(req,res)=>{
 });
 router.put("/user-editnote/:id",async (req,res)=>{
     const cid=req.params.id;
-    let value=await notes.findByIdAndUpdate(cid,{title:req.body.title,subtitle:req.body.subtitle,category:req.body.category,description:req.body.description})
+    let value=await notes.findByIdAndUpdate(cid,{title:req.body.title,subtitle:req.body.subtitle,category:req.body.category,description:req.body.description},{new:true})
     res.send(value)
 })
 router.delete("/deletenote/:id",async (req,res)=>{
