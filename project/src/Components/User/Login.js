@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import img from '../../Assets/userlogologin.JPG';
+
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 function Login() {
@@ -62,13 +63,13 @@ function Login() {
           <label htmlFor="pass" className="col-3 col-form-label">Password :-</label>
           <div className="col-8">
             <input
+            onChange={(e)=>
+              setPassword(e.target.value)}
               type="password"
               id="pass"
               className="form-control"
               placeholder="Enter password"
               value={pwd}
-              onChange={(e) =>
-                setPassword(e.target.value)}
             />
           </div>
         </div>
