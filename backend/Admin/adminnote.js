@@ -14,7 +14,7 @@ router.get("/viewnote",async (req,res)=>{
         return;
     }
     let data=jwt.verify(token,process.env.JWT_KEY)
-        const notes = await notemodel.find().populate("user","username");
+        const notes = await notemodel.find().populate("user","username").select("-password");
         return res.json(notes);
     
 })
@@ -28,7 +28,7 @@ router.get("/viewuser",async (req,res)=>{
         return;
     }
     let data=jwt.verify(token,process.env.JWT_KEY)
-    const viewusers=await viewuser.find().exec()
+    const viewusers=await viewuser.find().populate().select("-password")
     res.json(viewusers);
 })
 router.post("/addnote",async (req,res)=>{
@@ -45,7 +45,7 @@ router.post("/addnote",async (req,res)=>{
 })
 router.put("/editnote/:id",async (req,res)=>{
     const cid=req.params.id;
-    let value=await notemodel.findByIdAndUpdate(cid,{title:req.body.title,subtitle:req.body.subtitle,category:req.body.category,description:req.body.description})
+    let value=await notemodel.findByIdAndUpdate(cid,{title:req.body.title,subtitle:req.body.subtitle,category:req.body.category,description:req.body.description},{new:true})
     res.send(value)
 })
 router.delete("/deletenote/:id",async (req,res)=>{

@@ -29,7 +29,9 @@ router.post("/userlogin/register", [
         const hash = await bcrypt.hash(req.body.password, 10);
         const login = new userlogin({
             username: req.body.username,
-            password: hash
+            password: hash,
+            phno:req.body.phno,
+            email:req.body.email
         });
 
         await login.save();
@@ -43,7 +45,7 @@ router.post("/userlogin/verify", async (req, res) => {
 
     const user = await userlogin.findOne({ username: req.body.username })
     if (!user) {
-        res.send({ message: "User not found" })
+        res.status(400).send({ message: "User not found" })
     }
     else {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -56,10 +58,20 @@ router.post("/userlogin/verify", async (req, res) => {
                 res.send({ token })
             }
             else {
-                res.send({ message: "Password incorrect" })
+                res.status(400).send({ message: "Password incorrect" })
             }
         })
     }
 
+})
+router.put("/updateprofile/:id",async(req,res)=>{
+        const cid=req.params.id;
+        const hash = await bcrypt.hash(req.body.password, 10);
+        const login = new userlogin({
+            password: hash,
+        });
+        let value=await userlogin.findByIdAndUpdate(cid,{password:hash,phno:req.body.phno,email:req.body.email},{new:true})
+        res.send(value)
+        await login.save();
 })
 module.exports=router;

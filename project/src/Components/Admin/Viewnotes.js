@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import axios from 'axios'
 import Navbar from "./Navbar";
+import { Link } from 'react-router-dom';
 
 function Viewnotes() {
     const [data, setData] = useState([])
@@ -41,6 +42,7 @@ function Viewnotes() {
                                         </strong>
                                     </p>
                                     <a href="#" class="btn btn-primary">View more</a>
+                                    <Link class="btn btn-primary" to='/admin-editnote' style={{marginLeft:"20px"}}>EDIT</Link>
                                 </div>
                             </div>
                         </div>
