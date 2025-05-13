@@ -3,16 +3,30 @@ const notemodel=require("../Model/notes")
 const viewuser=require("../Model/user")
 const jwt=require("jsonwebtoken")
 const router=express.Router()
-router.get("/viewnote",async (req,res)=>{
-    if(req.headers.authorization)
+router.get("/viewnote/:id",async (req,res)=>{
+   if(!req.headers.authorization)
     {
-        token=req.headers.authorization.slice(7)
-        console.log(token)
-    }
-    else{
-        res.status(400).json({message:"error"})
+         res.status(400).json({message:"error"})
         return;
+       
     }
+     token=req.headers.authorization.slice(7)
+    console.log(token)
+    let data=jwt.verify(token,process.env.JWT_KEY)
+    const cid=req.params.id
+    const notes = await notemodel.findOne({_id:cid})
+    return res.json(notes);
+    
+})
+router.get("/viewnote",async (req,res)=>{
+    if(!req.headers.authorization)
+    {
+         res.status(400).json({message:"error"})
+        return;
+       
+    }
+     token=req.headers.authorization.slice(7)
+    console.log(token)
     let data=jwt.verify(token,process.env.JWT_KEY)
         const notes = await notemodel.find().populate("user","username").select("-password");
         return res.json(notes);

@@ -31,7 +31,7 @@ function App() {
         <Route path='/admin-viewuser' element={<Viewusers/>} ></Route>
         <Route path='/navbar' element={<Navbar/>} ></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
-        <Route path='/admin-editnote' element={<Editnotes/>}></Route>
+        <Route path='/admin-editnote/:id' element={<Editnotes/>}></Route>
         <Route path='/forgot' element={<Forgotpass/>}></Route>
         <Route path='/dashboard' element={<Dashboarduser/>}></Route>
         <Route path='/useraddnote' element={<Useraddnotes/>}></Route>

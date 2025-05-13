@@ -22,6 +22,23 @@ function Viewnotes() {
                 console.log("Error fetching notes:", err);
             });
     }, []);
+    
+    const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this note?");
+    if (!confirmDelete) return;
+
+    try {
+        const token = localStorage.getItem("token");
+        await axios.delete(`http://localhost:3000/deletenote/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        alert("Note deleted successfully");
+    } catch (err) {
+        console.error("Delete failed:", err);
+        alert("Failed to delete the note.");
+    }
+};
+
 
     return (
         <div>
@@ -42,8 +59,8 @@ function Viewnotes() {
                                         </strong>
                                     </p>
                                     <a href="#" class="btn btn-primary">View more</a>
-                                    <Link class="btn btn-primary" to='/admin-editnote' style={{marginLeft:"20px"}}>EDIT</Link>
-                                    <Link class="btn btn-primary" to='/admin-editnote' style={{marginLeft:"20px"}}>DELETE</Link>
+                                    <Link class="btn btn-primary" to={`/admin-editnote/${e._id}`}  style={{marginLeft:"20px"}}>EDIT</Link>
+                                     <button className="btn btn-primary" style={{ marginLeft: "20px" }} onClick={() => handleDelete(e._id)}>DELETE</button>
                                 </div>
                             </div>
                         </div>
