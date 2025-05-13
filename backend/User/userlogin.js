@@ -24,7 +24,7 @@ router.get("/user",async(req,res)=>{
     }
    
 });
-router.post("/useradd",async(req,res)=>{
+router.post("/useraddnote",async(req,res)=>{
     console.log(req.body)
         if (!req.headers.authorization) {
             return res.status(401).json({ message: "Unauthorized" });

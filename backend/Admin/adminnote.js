@@ -18,6 +18,20 @@ router.get("/viewnote",async (req,res)=>{
         return res.json(notes);
     
 })
+router.get("/viewnote/:id",async (req,res)=>{
+    if(!req.headers.authorization)
+    {
+        res.status(400).json({message:"error"})
+        return;
+        
+    }
+    const token=req.headers.authorization.slice(7)
+        console.log(token)
+    let data=jwt.verify(token,process.env.JWT_KEY)
+    const cid=req.params.id
+        const notes = await notemodel.findOne({_id:cid}).exec()
+        return res.json(notes);
+})
 router.get("/viewuser",async (req,res)=>{
     if(req.headers.authorization)
     {

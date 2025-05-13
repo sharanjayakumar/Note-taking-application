@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Navbar from './Navbar'
 
 function Editnotes() {
+    const {id}=useParams()
+    console.log(id)
     const [data, setData] = useState({ title: "", subtitle: "", category: "", description: "" })
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -11,7 +13,7 @@ function Editnotes() {
     const [datas, setDatas] = useState([])
     useEffect(()=>{
         var token = localStorage.getItem("token")
-        axios.get("http://localhost:3000/viewnote", {
+        axios.get("http://localhost:3000/viewnote/"+id, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -23,10 +25,10 @@ function Editnotes() {
            
         },[])
        
-    const editnote = async () => {
+    const editnote = async (id) => {
         try {
              var token = localStorage.getItem("token")
-            await axios.put("http://localhost:3000/editnote/",
+            await axios.put("http://localhost:3000/editnote",
                 {
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -36,10 +38,11 @@ function Editnotes() {
             console.log("error", err);
             alert("Data not updated");
         }; 
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Edited")
-        editnote();
+        editnote(id);
     }
     return (
         <div>
@@ -57,6 +60,7 @@ function Editnotes() {
                             placeholder="Enter title"
                             name="title"
                             onChange={handleChange}
+                            value={datas.title}
                         />
 
                         <label htmlFor="subtitle">SUB TITLE (optional):</label>
@@ -66,32 +70,33 @@ function Editnotes() {
                             placeholder="Enter subtitle"
                             name="subtitle"
                             onChange={handleChange}
+                            value={datas.subtitle}
                         />
 
                         <label>CATEGORY:</label>
                         <div className="radio-group">
                             <div>
-                                <input type="radio" id="c" value="C" name="category" onChange={handleChange} />
+                                <input type="radio" id="c" value="C" name="category" onChange={handleChange} checked={datas.category=="C"}/>
                                 <label htmlFor="c">C</label>
                             </div>
                             <div>
-                                <input type="radio" id="java" value="JAVA" name="category" onChange={handleChange} />
+                                <input type="radio" id="java" value="JAVA" name="category" onChange={handleChange} checked={datas.category=="JAVA"}/>
                                 <label htmlFor="java">JAVA</label>
                             </div>
                             <div>
-                                <input type="radio" id="python" value="PYTHON" name="category" onChange={handleChange} />
+                                <input type="radio" id="python" value="PYTHON" name="category" onChange={handleChange} checked={datas.category=="PYTHON"}/>
                                 <label htmlFor="python">PYTHON</label>
                             </div>
                             <div>
-                                <input type="radio" id="html" value="HTML" name="category" onChange={handleChange} />
+                                <input type="radio" id="html" value="HTML" name="category" onChange={handleChange} checked={datas.category=="HTML"} />
                                 <label htmlFor="html">HTML</label>
                             </div>
                             <div>
-                                <input type="radio" id="css" value="CSS" name="category" onChange={handleChange} />
+                                <input type="radio" id="css" value="CSS" name="category" onChange={handleChange} checked={datas.category=="CSS"}/>
                                 <label htmlFor="css">CSS</label>
                             </div>
                             <div>
-                                <input type="radio" id="js" value="JAVASCRIPT" name="category" onChange={handleChange} />
+                                <input type="radio" id="js" value="JAVASCRIPT" name="category" onChange={handleChange}checked={datas.category=="JAVASCRIPT"} />
                                 <label htmlFor="js">JAVASCRIPT</label>
                             </div>
                         </div>
@@ -101,6 +106,7 @@ function Editnotes() {
                             id="desc"
                             name="description"
                             onChange={handleChange}
+                            value={datas.description}
                         ></textarea>
 
                         <div className="button-group">
@@ -116,6 +122,6 @@ function Editnotes() {
         </div>
     )
 }
-}
+
 
 export default Editnotes
