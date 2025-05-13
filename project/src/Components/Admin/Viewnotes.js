@@ -43,6 +43,7 @@ function Viewnotes() {
                                     </p>
                                     <a href="#" class="btn btn-primary">View more</a>
                                     <Link class="btn btn-primary" to='/admin-editnote' style={{marginLeft:"20px"}}>EDIT</Link>
+                                    <Link class="btn btn-primary" to='/admin-editnote' style={{marginLeft:"20px"}}>DELETE</Link>
                                 </div>
                             </div>
                         </div>
