@@ -27,10 +27,9 @@ function App() {
         <Route path='/admin-addnote' element={<Addnotes/>} ></Route>
         <Route path='/admin-viewuser' element={<Viewusers/>} ></Route>
         <Route path='/navbar' element={<Navbar/>} ></Route>
-        <Route path='/forgot' element={<Forgotpass/>}></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
         <Route path='/admin-editnote' element={<Editnotes/>}></Route>
-       
+        <Route path='/forgot' element={<Forgotpass/>}></Route>
       </Routes>
       
     </div>
