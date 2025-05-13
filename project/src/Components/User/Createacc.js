@@ -1,55 +1,67 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 function Createacc() {
+  const [data,userdata]=useState({username:"",email:"",password:"",cpasswd:"",phno:""})
+  const handlechange = (e)=>{
+    userdata({ ...data, [e.target.name]: e.target.value })
+  }
+  const addUser = async()=>{
+    try {
+    var token = localStorage.getItem("token")
+    await axios.post('http://localhost:3000/userlogin/register',{
+      username:data.username,
+      email:data.email,
+      password:data.password,
+      phno:data.phno
+      },{headers:{Authorization:`Bearer ${token}`}})
+      alert("User added successfully")
+    }
+    catch{
+      alert("Error")
+    }
+  }
+    const handleSubmit=(e)=>{
+      e.preventDefault()
+      addUser()
+    }
+     
   return (
     <div>
-        <form className='my-3 mx-auto' style={{border:'solid',width:'700px'}}>
-    <center>
-      <form className="mb-3" controlId="formBasicEmail">
-      <label>ID/NAME</label>
-      <center>
-      <input style={{width:'300px'}} type="text" placeholder="Enter name or id" />
-      </center>
+      <form onSubmit={handleSubmit} className='my-3 mx-auto d-flex flex-column' style={{border:'solid',width:'700px'}}>
+    
+      <form className="mb-3 mx-auto" controlId="formBasicEmail">
+      <label className='text-center w-100'>ID/NAME</label><br/>
       
-        <label>Email address</label>
-        <center>
-        <input style={{width:'300px'}} type="email" placeholder="Enter email" />
-        </center>
-        
+      <input onChange={handlechange} style={{width:'300px'}} name='username' type="text" placeholder="Enter name or id" /><br/>
+      
+      
+        <label className='text-center w-100'>Email address</label><br/>
+        <input onChange={handlechange} name='email' style={{width:'300px'}} className='mx-auto' type="email" placeholder="Enter email" /><br/>
         <label className="text-muted">
           We'll never share your email with anyone else.
         </label>
       </form>
 
-      <form className="mb-3" controlId="formBasicPassword">
-        <label>Password</label>
-        <center>
-        <input style={{width:'300px'}} type="password" placeholder="Password" />
-        </center> 
+      <form className="mb-3 mx-auto" controlId="formBasicPassword">
+        <label className='text-center w-100'>Password</label>
+        <input onChange={handlechange} name='password' style={{width:'300px'}} className='mx-auto' type="password" placeholder="Password" /> 
       </form>
-      <form className="mb-3" controlId="formBasicPassword">
-        <label>Confirm Password</label>
-        <center>
-        <input style={{width:'300px'}} type="password" placeholder="Password once more" />
-        </center>
+      <form className="mb-3 mx-auto" controlId="formBasicPassword">
+        <label className='text-center w-100'>Confirm Password</label>
+        <input onChange={handlechange} name='cpasswd' style={{width:'300px'}} className='mx-auto' type="password" placeholder="Password once more" />
       </form>
-      <form className="mb-3" controlId="formBasicNumber">
-        <label>Phone Number</label>
-        <center>
-        <input style={{width:'300px'}} type="number" placeholder="Your 10 digit number" /><br/>
-        </center>
+      <form className="mb-3 mx-auto" controlId="formBasicNumber">
+        <label className='text-center w-100'>Phone Number</label> 
+        <input onChange={handlechange} name='phno' style={{width:'300px'}} className='mx-auto' type="number" placeholder="Your 10 digit number" /><br/>
         </form>
-      <form>
-        <label className='mb-3'>Course</label>
-        <center><input style={{width:'300px'}} type='text' placeholder='Enter the course you are studying'/></center>
-      </form>
         
     <br/><br/>
-      <button  style={{backgroundColor:'blue',color:'white'}} variant="primary" type="submit">
+      <button className='w-25 mx-auto butn' style={{backgroundColor:'blue',color:'white',}} variant="primary" type="submit">
         <Link to='/login'></Link>
         Create account
       </button><br/><br/>
-      </center>
+      
     </form>
     
     </div>

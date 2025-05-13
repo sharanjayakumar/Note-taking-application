@@ -43,7 +43,7 @@ router.post("/userlogin/verify", async (req, res) => {
 
     const user = await userlogin.findOne({ username: req.body.username })
     if (!user) {
-        res.send({ message: "User not found" })
+        res.status(400).send({ message: "User not found" })
     }
     else {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -56,7 +56,7 @@ router.post("/userlogin/verify", async (req, res) => {
                 res.send({ token })
             }
             else {
-                res.send({ message: "Password incorrect" })
+                res.status(400).send({ message: "Password incorrect" })
             }
         })
     }

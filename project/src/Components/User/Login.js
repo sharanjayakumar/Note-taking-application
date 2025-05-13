@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import img from '../../Assets/userlogologin.JPG';
 import {Link, useNavigate} from "react-router-dom";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
@@ -18,20 +17,26 @@ function Login() {
     }
     else{
       const userlogin = async()=>{
-        axios.post("http://localhost:3000/login/userlogin/verify",{
+        axios.post("http://localhost:3000/userlogin/verify",{
           username:user,password:pwd
         }).then((res)=>{
           if(res.data)
           {
-            navigate('/admin-dashboard')
-            localStorage.setItem("token",res.data)
+            navigate('/dashboard')
+            localStorage.setItem("token",res.data.token)
           }
         
         })
         .catch((err)=>{
+          if(err.status == 400)
+          {
+            alert("Invalid credentials")
+          }
           console.log(err)
         });
       }
+    userlogin()
+
     }
     }
   
@@ -69,7 +74,11 @@ function Login() {
           </div>
         </div>
         <center>
-          <button className="butn" type="submit">LOGIN</button>
+    
+          <button  className="butn" type="submit">
+            LOGIN
+          </button>
+          
         </center>
         <div className='row'>
           <Link to='/forgot' className=' col-6'>FORGOT PASSWORD</Link>
