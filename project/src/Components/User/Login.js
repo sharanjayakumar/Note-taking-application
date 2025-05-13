@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import img from '../../Assets/userlogologin.JPG';
 import axios from 'axios';
 function Login() {
-  const [user, setUserName]=useState('')
-  const [pwd,setPassword]=useState('')
+  const [user, setUserName] = useState('')
+  const [pwd, setPassword] = useState('')
   const navigate = useNavigate()
-  
-  const validate = (e)=>{
+  const validate = (e) => {
     e.preventDefault();
-    if(user === ''){
+    if (user === '') {
       alert('Enter username')
     }
-    else if(pwd === ''){
+    else if (pwd === '') {
       alert('Enter password')
     }
     else{
@@ -25,7 +25,8 @@ function Login() {
             navigate('/dashboard')
             localStorage.setItem("token",res.data.token)
           }
-        
+          
+          
         })
         .catch((err)=>{
           if(err.status == 400)
@@ -38,24 +39,24 @@ function Login() {
     userlogin()
 
     }
-    }
-  
-  return (   
+    
+  }
+  return (
     <div className='l'>
-      <form onSubmit={validate} style={{marginLeft:'100px'}} className='form_login my-5'>
+      <form style={{ marginLeft: '100px' }} className='form_login my-5' onSubmit={validate}>
         <h3>USER</h3><br />
         <div className="row mb-3 align-items-center">
           <label htmlFor="user" className="col-3 col-form-label">Username:-</label>
           <div className="col-8">
             <input
-              onChange={(e)=>
-                setUserName(e.target.value)
-              }
               type="text"
               id="user"
               className="form-control"
-              placeholder="Enter username"
               value={user}
+              placeholder="Enter username"
+              onChange={(e) =>
+                setUserName(e.target.value)
+              }
             />
           </div>
         </div>
@@ -81,10 +82,10 @@ function Login() {
           
         </center>
         <div className='row'>
-          <Link to='/forgot' className=' col-6'>FORGOT PASSWORD</Link>
-          <Link to='/create_account' className=' col-6'>CREATE NEW ACCOUNT?</Link>
+          <Link to='/Forgotpassword' className='col-6'>FORGOT PASSWORD</Link>
+          <Link to='/register' className='col-6'>CREATE NEW ACCOUNT?</Link>
         </div>
-        
+
       </form>
     </div>
   )

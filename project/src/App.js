@@ -13,6 +13,11 @@ import Viewusers from './Components/Admin/Viewusers';
 import Dashboarduser from './Components/User/Dashboarduser';
 import Useraddnotes from './Components/User/Addnote';
 import Viewnote from './Components/User/Viewnote';
+import Editnotes from './Components/Admin/Editnotes';
+
+
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,11 +26,12 @@ function App() {
         <Route path="/login"  element={<Login/>}></Route>
         <Route path='/admin-login' element={<Loginpage/>}></Route>
         <Route path='/admin-dashboard' element={<Dashboard/>} ></Route>
-        <Route path='/viewnote' element={<Viewnotes/>} ></Route>
-        <Route path='/addnote' element={<Addnotes/>} ></Route>
-        <Route path='/viewuser' element={<Viewusers/>} ></Route>
+        <Route path='/admin-viewnote' element={<Viewnotes/>} ></Route>
+        <Route path='/admin-addnote' element={<Addnotes/>} ></Route>
+        <Route path='/admin-viewuser' element={<Viewusers/>} ></Route>
         <Route path='/navbar' element={<Navbar/>} ></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
+        <Route path='/admin-editnote' element={<Editnotes/>}></Route>
         <Route path='/forgot' element={<Forgotpass/>}></Route>
         <Route path='/dashboard' element={<Dashboarduser/>}></Route>
         <Route path='/useraddnote' element={<Useraddnotes/>}></Route>

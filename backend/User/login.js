@@ -29,7 +29,9 @@ router.post("/userlogin/register", [
         const hash = await bcrypt.hash(req.body.password, 10);
         const login = new userlogin({
             username: req.body.username,
-            password: hash
+            password: hash,
+            phno:req.body.phno,
+            email:req.body.email
         });
 
         await login.save();
@@ -61,5 +63,15 @@ router.post("/userlogin/verify", async (req, res) => {
         })
     }
 
+})
+router.put("/updateprofile/:id",async(req,res)=>{
+        const cid=req.params.id;
+        const hash = await bcrypt.hash(req.body.password, 10);
+        const login = new userlogin({
+            password: hash,
+        });
+        let value=await userlogin.findByIdAndUpdate(cid,{password:hash,phno:req.body.phno,email:req.body.email},{new:true})
+        res.send(value)
+        await login.save();
 })
 module.exports=router;
