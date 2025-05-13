@@ -54,17 +54,33 @@ function Editnotes() {
                     <label htmlFor="subtitle">SUB TITLE (optional):</label>
                     <input type="text" id="subtitle" name="subtitle" value={data.subtitle} onChange={handleChange} />
 
-                    <label>CATEGORY:</label>
-                    <div className="radio-group">
-                        {["C", "JAVA", "PYTHON", "HTML", "CSS", "JAVASCRIPT"].map(cat => (
-                            <div key={cat}>
-                                <input type="radio" id={cat} value={cat} name="category"
-                                    checked={data.category === cat}
-                                    onChange={handleChange} />
-                                <label htmlFor={cat}>{cat}</label>
+                     <label>CATEGORY:</label>
+                        <div className="radio-group">
+                            <div>
+                                <input type="radio" id="c" value="C" name="category" onChange={handleChange} checked={data.category === "C"} />
+                                <label htmlFor="c">C</label>
                             </div>
-                        ))}
-                    </div>
+                            <div>
+                                <input type="radio" id="java" value="JAVA" name="category" onChange={handleChange} checked={data.category === "JAVA"}/>
+                                <label htmlFor="java">JAVA</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="python" value="PYTHON" name="category" onChange={handleChange} checked={data.category === "PYTHON"}/>
+                                <label htmlFor="python">PYTHON</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="html" value="HTML" name="category" onChange={handleChange} checked={data.category === "HTML"} />
+                                <label htmlFor="html">HTML</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="css" value="CSS" name="category" onChange={handleChange} checked={data.category === "CSS"} />
+                                <label htmlFor="css">CSS</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="js" value="JAVASCRIPT" name="category" onChange={handleChange} checked={data.category === "JAVASCRIPT"}/>
+                                <label htmlFor="js">JAVASCRIPT</label>
+                            </div>
+                        </div>
 
                     <label htmlFor="desc">DESCRIPTION:</label>
                     <textarea id="desc" name="description" value={data.description} onChange={handleChange} />
