@@ -14,6 +14,7 @@ import Dashboarduser from './Components/User/Dashboarduser';
 import Useraddnotes from './Components/User/Addnote';
 import Viewnote from './Components/User/Viewnote';
 import Editnotes from './Components/Admin/Editnotes';
+import ViewDetailednotes from './Components/Admin/ViewDetailednotes';
 
 
 
@@ -32,6 +33,7 @@ function App() {
         <Route path='/navbar' element={<Navbar/>} ></Route>
         <Route path='/create_account' element={<Createacc/>}></Route>
         <Route path='/admin-editnote/:id' element={<Editnotes/>}></Route>
+        <Route path='/admin-viewdetailnotes/:id' element={<ViewDetailednotes/>}></Route>
         <Route path='/forgot' element={<Forgotpass/>}></Route>
         <Route path='/dashboard' element={<Dashboarduser/>}></Route>
         <Route path='/useraddnote' element={<Useraddnotes/>}></Route>

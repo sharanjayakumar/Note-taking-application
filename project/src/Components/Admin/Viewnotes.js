@@ -23,23 +23,6 @@ function Viewnotes() {
             });
     }, []);
     
-    const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this note?");
-    if (!confirmDelete) return;
-
-    try {
-        const token = localStorage.getItem("token");
-        await axios.delete(`http://localhost:3000/deletenote/${id}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        alert("Note deleted successfully");
-    } catch (err) {
-        console.error("Delete failed:", err);
-        alert("Failed to delete the note.");
-    }
-};
-
-
     return (
         <div>
             <Navbar />
@@ -52,15 +35,15 @@ function Viewnotes() {
                                 <div class="card-body">
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>
-                                    <p class="card-text">{e.description}</p>
+                                    <p class="card-text">{e.description}..</p>
                                     <p className="card-text">
                                         Posted by <strong>
                                            {e.user ? e.user?.username :"Admin"}
                                         </strong>
                                     </p>
-                                    <a href="#" class="btn btn-primary">View more</a>
-                                    <Link class="btn btn-primary" to={`/admin-editnote/${e._id}`}  style={{marginLeft:"20px"}}>EDIT</Link>
-                                     <button className="btn btn-primary" style={{ marginLeft: "20px" }} onClick={() => handleDelete(e._id)}>DELETE</button>
+                                    <Link class="btn btn-primary" to={`/admin-viewdetailnotes/${e._id}`}>View more</Link>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>

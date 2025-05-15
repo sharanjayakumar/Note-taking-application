@@ -25,10 +25,16 @@ router.get("/viewnote",async (req,res)=>{
         return;
        
     }
-     token=req.headers.authorization.slice(7)
+     const token=req.headers.authorization.slice(7)
     console.log(token)
     let data=jwt.verify(token,process.env.JWT_KEY)
         const notes = await notemodel.find().populate("user","username").select("-password");
+        console.log(notes)
+        for(let i=0;i<notes.length;i++)
+        {
+            notes[i].description=notes[i].description.slice(0,30);
+        }
+         //notes.description=notes
         return res.json(notes);
     
 })

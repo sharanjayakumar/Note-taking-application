@@ -28,21 +28,21 @@ function Viewusers() {
       <table  style={{
         width: '80%',
         margin: '20px auto',
-        borderCollapse:'collapse',
+        //borderCollapse:'collapse',
         }}>
         <thead>
-          <tr>
-            <th>Username</th>
-            <th >Phone No</th>
-            <th>Email</th>
+          <tr style={{border:" 1px solid"}}>
+            <th style={{border:" 1px solid"}}>Username</th>
+            <th style={{border:" 1px solid"}}>Phone No</th>
+            <th style={{border:" 1px solid"}}>Email</th>
           </tr>
         </thead>
         <tbody>
           {data.map((e) => (
-            <tr>
-              <td>{e.username}</td>
-              <td>{e.phno}</td>
-              <td>{e.email}</td>
+            <tr style={{border:" 1px solid"}}>
+              <td style={{border:" 1px solid"}}>{e.username}</td>
+              <td style={{border:" 1px solid"}}>{e.phno}</td>
+              <td style={{border:" 1px solid"}}>{e.email}</td>
             </tr>
           ))}
         </tbody>

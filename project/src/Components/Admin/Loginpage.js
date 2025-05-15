@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import Navbar from './Navbar';
 
 function Loginpage() {
   const [user, setAdmin] = useState('');
@@ -43,6 +44,7 @@ function Loginpage() {
 
   return (
     <div className='Login'>
+      <Navbar/>
       <form className='form_login' onSubmit={validate}>
         <h3>ADMIN</h3><br />
         <div className="row mb-3 align-items-center">
