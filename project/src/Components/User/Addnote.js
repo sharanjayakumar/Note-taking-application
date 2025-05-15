@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Nav from "./Nav";
 
 function Addnote() {
   const [data, setDatas] = useState({ title: "", subtitle: "", category: "", description: "" });
@@ -33,6 +34,7 @@ function Addnote() {
 
   return (
     <div>
+      <Nav/>
       <br />
       <center><h1>ADD NOTES</h1></center>
       <br />
@@ -93,7 +95,7 @@ function Addnote() {
 
           <div className="button-group">
             <button type="submit" className="bttn">ADD</button>
-            <Link to="/admin-dashboard">
+            <Link to="/dashboard">
               <button type="button" className="bttns">CANCEL</button>
             </Link>
           </div>

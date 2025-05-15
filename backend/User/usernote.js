@@ -2,7 +2,7 @@ const express=require("express")
 const jwt=require("jsonwebtoken")
 const notes=require("../Model/notes")
 const router=express.Router()
-router.get("/user",async(req,res)=>{
+router.get("/userviewnote",async(req,res)=>{
     console.log(req.headers.authorization)
     if(req.headers.authorization){
         token=req.headers.authorization.slice(7)
@@ -24,6 +24,17 @@ router.get("/user",async(req,res)=>{
     }
    
 });
+router.get("/userviewnote/:id",async(req,res)=>{
+    if(!req.headers.authorization)
+    {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    const token = req.headers.authorization.slice(7);
+    const data = jwt.verify(token, process.env.JWT_KEY);
+    const cid = req.params.id;
+    const note = await notes.findOne({_id:cid})
+    return(res.json(note));
+})
 router.post("/useraddnote",async(req,res)=>{
     console.log(req.body)
         if (!req.headers.authorization) {
@@ -52,7 +63,7 @@ router.put("/user-editnote/:id",async (req,res)=>{
     let value=await notes.findByIdAndUpdate(cid,{title:req.body.title,subtitle:req.body.subtitle,category:req.body.category,description:req.body.description},{new:true})
     res.send(value)
 })
-router.delete("/deletenote/:id",async (req,res)=>{
+router.delete("/userdeletenote/:id",async (req,res)=>{
     try{
         const del=await notes.deleteOne({_id:req.params.id}).exec()
         res.send(del)

@@ -83,7 +83,7 @@ function Login() {
         </center>
         <div className='row'>
           <Link to='/Forgotpassword' className='col-6'>FORGOT PASSWORD</Link>
-          <Link to='/register' className='col-6'>CREATE NEW ACCOUNT?</Link>
+          <Link to='/create_account' className='col-6'>CREATE NEW ACCOUNT?</Link>
         </div>
 
       </form>
