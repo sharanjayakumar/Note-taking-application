@@ -22,10 +22,36 @@ function Createacc() {
     }
   }
     const handleSubmit=(e)=>{
+      
       e.preventDefault()
-      addUser()
+      if(validate())
+        {addUser()}
     }
-     
+    const validate=()=>{
+      let flag = true;
+      if (data.username.length<4)
+      {
+        flag = false;
+        alert("Enter your full name");
+      }
+      if (data.password<8)
+      {
+        flag = false;
+        alert("Enter a strong password");
+      }
+      if (data.phno.length<10)
+      {
+        flag = false;
+        alert("Enter a valid phone number");
+      }
+      if(data.cpasswd != data.password)
+      {
+        flag = false;
+        alert("Password and confirm password are diffrent");
+      }
+      return flag;
+    }
+    
   return (
     <div>
       <form onSubmit={handleSubmit} className='my-3 mx-auto d-flex flex-column' style={{border:'solid',width:'700px'}}>
