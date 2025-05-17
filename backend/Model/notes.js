@@ -14,6 +14,9 @@ const noteSchema=mongoose.Schema({
     admin:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"login"
+    },
+    approved:{
+        type:Boolean,default:false
     }
 })
 module.exports=mongoose.model("notes",noteSchema)

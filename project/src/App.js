@@ -16,6 +16,7 @@ import Viewnote from './Components/User/Viewnote';
 import Editnotes from './Components/Admin/Editnotes';
 import ViewDetailednotes from './Components/Admin/ViewDetailednotes';
 import Editnote from './Components/User/Editnote';
+import Validatenotes from './Components/Admin/Validatenotes';
 
 
 
@@ -40,6 +41,7 @@ function App() {
         <Route path='/useraddnote' element={<Useraddnotes/>}></Route>
         <Route path='/userviewnote' element={<Viewnote/>}></Route>
         <Route path='/usereditnote/:id' element={<Editnote></Editnote>}></Route>
+        <Route path="/validatenotes" element={<Validatenotes/>}></Route>
       </Routes>
       
     </div>

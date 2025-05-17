@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 
 function Editnotes() {
     const [data, setData] = useState({ title: "", subtitle: "", category: "", description: "" });
     const { id } = useParams();
+    const navigate=useNavigate();
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -29,6 +30,7 @@ function Editnotes() {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert("Note updated successfully");
+            navigate('/admin-viewnote')
         } catch (err) {
             console.log("error", err);
             alert("Data not updated");
