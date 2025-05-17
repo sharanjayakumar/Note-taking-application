@@ -22,20 +22,6 @@ function Viewnotes() {
                 console.log("Error fetching notes:", err);
             });
     }, []);
-    const userdelete = async(id)=>{
-        const confirm = window.confirm("Are you sure you want to delete this note?")
-        if(! confirm)
-        {return;}
-        try{
-            const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:3000/userdeletenote/${id}`,{headers:{Authorization:`Bearer ${token}`}})
-            alert("Note deleted successfully")
-        }
-        catch(err){
-            console.log(err)
-            alert("failed to delete note")
-        }
-    }
     return (
         <div>
             <Nav/>
@@ -49,9 +35,7 @@ function Viewnotes() {
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>
                                     <p class="card-text">{e.description}</p>
-                                    <a href="#" class="btn btn-primary">View more</a>
-                                    <Link class="btn btn-primary" to={`/usereditnote/${e._id}`} style={{marginLeft:"20px"}}>EDIT</Link>
-                                    <button onClick={()=>userdelete(e._id)} class="btn btn-primary" to='/usereditnote' style={{marginLeft:"20px"}}>DELETE</button>
+                                    <Link to={`/userdetailednote/${e._id}`} class="btn btn-primary">View more</Link>
                                 </div>
                             </div>
                         </div>

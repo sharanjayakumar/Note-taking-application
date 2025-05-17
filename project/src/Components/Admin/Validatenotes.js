@@ -11,6 +11,7 @@ function Validatenotes() {
         axios.get(`http://localhost:3000/reject`, { headers: { Authorization: `Bearer ${token}` } })
             .then((res) => {
                 setDatas(res.data);
+                
                 console.log("Notes fetched:", res.data);
             })
             .catch((err) => {
