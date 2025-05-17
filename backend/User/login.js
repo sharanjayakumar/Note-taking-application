@@ -74,4 +74,14 @@ router.put("/updateprofile/:id",async(req,res)=>{
         res.send(value)
         await login.save();
 })
+router.get("/viewprofile",async(req,res)=>{
+    console.log(req.body)
+            if (!req.headers.authorization) {
+                return res.status(401).json({ message: "Unauthorized" });
+            }
+            const token = req.headers.authorization.slice(7);
+            const data = jwt.verify(token, process.env.JWT_KEY);
+            const user = await userlogin.findById(data.id);
+            res.send(user);
+})
 module.exports=router;

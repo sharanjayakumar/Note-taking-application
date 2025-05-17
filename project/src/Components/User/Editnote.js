@@ -2,9 +2,10 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Nav from './Nav';
-
+import { useNavigate } from 'react-router-dom';
 function Editnote() {
     const {id} = useParams();
+    const navigate = useNavigate();
     const [data, setData] = useState({ title: "", subtitle: "", category: "", description: "" })
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
@@ -31,6 +32,7 @@ function Editnote() {
                 headers: { Authorization: `Bearer ${token}` }
             });
              alert("Note updated successfully")
+             navigate('/userviewnote')
         } 
          catch (err) {
             console.log("error", err);

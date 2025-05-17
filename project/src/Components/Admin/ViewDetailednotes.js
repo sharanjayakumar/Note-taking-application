@@ -1,10 +1,9 @@
-
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 
 function ViewDetailednotes() {
-     const { id } = useParams();
+    const { id } = useParams();
     const [data,setData]=useState([])
     useEffect(()=>{
         const token=localStorage.getItem("token")
