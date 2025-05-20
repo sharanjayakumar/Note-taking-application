@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Nav from './Nav'
+import ViewnoteNav from './ViewnoteNav'
 
 function Viewnotes() {
     const [data, setData] = useState([])
@@ -24,7 +24,7 @@ function Viewnotes() {
     }, []);
     return (
         <div>
-            <Nav/>
+            <ViewnoteNav/>
             <div class="container">
                 <center><h1>NOTES</h1></center><br></br>
                 <div class="row">
@@ -35,6 +35,9 @@ function Viewnotes() {
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>
                                     <p class="card-text">{e.description}</p>
+                                    <p className='card-text'>
+                                        Posted by <strong>{e.user? e.user?.username:"admin"}</strong>
+                                    </p>
                                     <Link to={`/userdetailednote/${e._id}`} class="btn btn-primary">View more</Link>
                                 </div>
                             </div>

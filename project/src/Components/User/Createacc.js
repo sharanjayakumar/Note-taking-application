@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Nav from './Nav'
+import Createnav from './Createnav'
 function Createacc() {
   const [data,userdata]=useState({username:"",email:"",password:"",cpasswd:"",phno:""})
   const handlechange = (e)=>{
@@ -54,6 +56,7 @@ function Createacc() {
     
   return (
     <div>
+      <Createnav/>
       <form onSubmit={handleSubmit} className='my-3 mx-auto d-flex flex-column' style={{border:'solid',width:'700px'}}>
     
       <form className="mb-3 mx-auto" controlId="formBasicEmail">

@@ -84,4 +84,15 @@ router.get("/viewprofile",async(req,res)=>{
             const user = await userlogin.findById(data.id);
             res.send(user);
 })
+router.put("/editprofile",async(req,res)=>{
+    console.log(req.body)
+        if (!req.headers.authorization) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        const token = req.headers.authorization.slice(7);
+        const data = jwt.verify(token, process.env.JWT_KEY);
+        let value = await userlogin.findByIdAndUpdate(data.id,{username:req.body.username,email:req.body.email,phno:req.body.phno})
+        res.send(value);
+
+})
 module.exports=router;
