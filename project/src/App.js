@@ -18,6 +18,7 @@ import ViewDetailednotes from './Components/Admin/ViewDetailednotes';
 import Editnote from './Components/User/Editnote';
 import Detailedview from './Components/User/Detailedview';
 import Viewprofile from './Components/User/Viewprofile';
+import Editprofile from './Components/User/Editprofile';
 
 
 
@@ -44,6 +45,7 @@ function App() {
         <Route path='/usereditnote/:id' element={<Editnote></Editnote>}></Route>
         <Route path='/userdetailednote/:id' element={<Detailedview></Detailedview>}></Route>
         <Route path='/viewprofile' element={<Viewprofile></Viewprofile>}></Route>
+        <Route path='/editprofile' element={<Editprofile></Editprofile>}></Route>
       </Routes>
       
     </div>

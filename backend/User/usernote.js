@@ -16,7 +16,7 @@ router.get("/userviewnote",async(req,res)=>{
     console.log(data.username)
     console.log(data.id)
     try{
-        const note=await notes.find({user:data.id}).exec()
+        const note=await notes.find().populate("user","username").select("-password")
         res.json(note)
     }
     catch (err) {

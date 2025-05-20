@@ -56,8 +56,10 @@ function Detailedview() {
             </div>
             <br></br>
             <center>
+                <Link to='/userviewnote' class="btn btn-primary">BACK</Link>
                 <Link class="btn btn-primary" to={`/usereditnote/${data._id}`} style={{marginLeft:"20px"}}>EDIT</Link>
                 <button onClick={()=>userdelete(data._id)} className="btn btn-primary" to='/usereditnote' style={{marginLeft:"20px"}}>DELETE</button>
+                <Link to='' class="btn btn-primary" style={{marginLeft:"20px"}}>SAVE</Link>
             </center> 
         </div>
   )
