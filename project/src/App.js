@@ -16,6 +16,9 @@ import Viewnote from './Components/User/Viewnote';
 import Editnotes from './Components/Admin/Editnotes';
 import ViewDetailednotes from './Components/Admin/ViewDetailednotes';
 import Editnote from './Components/User/Editnote';
+<<<<<<< HEAD
+import Validatenotes from './Components/Admin/Validatenotes';
+=======
 import Detailedview from './Components/User/Detailedview';
 import Viewprofile from './Components/User/Viewprofile';
 import Editprofile from './Components/User/Editprofile';
@@ -43,6 +46,9 @@ function App() {
         <Route path='/useraddnote' element={<Useraddnotes/>}></Route>
         <Route path='/userviewnote' element={<Viewnote/>}></Route>
         <Route path='/usereditnote/:id' element={<Editnote></Editnote>}></Route>
+<<<<<<< HEAD
+        <Route path="/validatenotes" element={<Validatenotes/>}></Route>
+=======
         <Route path='/userdetailednote/:id' element={<Detailedview></Detailedview>}></Route>
         <Route path='/viewprofile' element={<Viewprofile></Viewprofile>}></Route>
         <Route path='/editprofile' element={<Editprofile></Editprofile>}></Route>
