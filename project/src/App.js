@@ -16,12 +16,10 @@ import Viewnote from './Components/User/Viewnote';
 import Editnotes from './Components/Admin/Editnotes';
 import ViewDetailednotes from './Components/Admin/ViewDetailednotes';
 import Editnote from './Components/User/Editnote';
-<<<<<<< HEAD
 import Validatenotes from './Components/Admin/Validatenotes';
-=======
 import Detailedview from './Components/User/Detailedview';
 import Viewprofile from './Components/User/Viewprofile';
->>>>>>> 48dd37db38dc027fd8bd825e524ed9477642682d
+import Category from './Components/Admin/Category';
 
 
 
@@ -46,12 +44,16 @@ function App() {
         <Route path='/useraddnote' element={<Useraddnotes/>}></Route>
         <Route path='/userviewnote' element={<Viewnote/>}></Route>
         <Route path='/usereditnote/:id' element={<Editnote></Editnote>}></Route>
-<<<<<<< HEAD
         <Route path="/validatenotes" element={<Validatenotes/>}></Route>
-=======
         <Route path='/userdetailednote/:id' element={<Detailedview></Detailedview>}></Route>
         <Route path='/viewprofile' element={<Viewprofile></Viewprofile>}></Route>
->>>>>>> 48dd37db38dc027fd8bd825e524ed9477642682d
+        <Route path='/category/c' element={<Category cat="C"></Category>}></Route>
+        <Route path='/category/java' element={<Category cat="JAVA"></Category>}></Route>
+        <Route path='/category/python' element={<Category cat="PYTHON"></Category>}></Route>
+        <Route path='/category/html' element={<Category cat="HTML"></Category>}></Route>
+        <Route path='/category/css' element={<Category cat="CSS"></Category>}></Route>
+        <Route path='/category/javascript' element={<Category cat="JAVASCRIPT"></Category>}></Route>
+
       </Routes>
       
     </div>

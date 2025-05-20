@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom';
 
 function Viewnotes() {
     const [data, setData] = useState([])
+    const [search,setSearch]=useState([])
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get('http://localhost:3000/viewnote', {
+        axios.get(`http://localhost:3000/viewnote?title=${search}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -21,11 +22,11 @@ function Viewnotes() {
             .catch((err) => {
                 console.log("Error fetching notes:", err);
             });
-    }, []);
+    }, [search]);
     
     return (
         <div>
-            <Navbar />
+            <Navbar setSearch={setSearch} />
             <div class="container">
                 <center><h1>NOTES</h1></center><br></br>
                 <div class="row">
@@ -35,6 +36,7 @@ function Viewnotes() {
                                 <div class="card-body">
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>
+                                     <p class="card-text"><b>Category:</b> {e.category}</p>
                                     <p class="card-text">{e.description}..</p>
                                     <p className="card-text">
                                         Posted by <strong>
