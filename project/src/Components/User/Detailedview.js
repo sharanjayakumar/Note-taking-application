@@ -35,6 +35,18 @@ function Detailedview() {
             alert("failed to delete note")
         }
     }
+    const savednote=async(id)=>{
+        try{
+            const token = localStorage.getItem("token");
+            await axios.post(`http://localhost:3000/savenote/${id}`,{},{headers:{Authorization:`Bearer ${token}`}})
+            alert("Note saved successfully")
+        }
+        catch(err){
+            console.log(err)
+            alert("failed to save note")
+        }
+         
+    }
   return (
     <div>
         <Nav/>
@@ -59,7 +71,7 @@ function Detailedview() {
                 <Link to='/userviewnote' class="btn btn-primary">BACK</Link>
                 <Link class="btn btn-primary" to={`/usereditnote/${data._id}`} style={{marginLeft:"20px"}}>EDIT</Link>
                 <button onClick={()=>userdelete(data._id)} className="btn btn-primary" to='/usereditnote' style={{marginLeft:"20px"}}>DELETE</button>
-                <Link to='' class="btn btn-primary" style={{marginLeft:"20px"}}>SAVE</Link>
+               <button class="btn btn-primary" style={{marginLeft:"20px"}} onClick={()=>savednote(data._id)} >SAVE</button>
             </center> 
         </div>
   )

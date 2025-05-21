@@ -21,6 +21,7 @@ import Detailedview from './Components/User/Detailedview';
 import Viewprofile from './Components/User/Viewprofile';
 import Editprofile from './Components/User/Editprofile';
 import Category from './Components/Admin/Category';
+import Savenotes from './Components/User/Savenotes';
 
 
 
@@ -55,6 +56,7 @@ function App() {
         <Route path='/category/html' element={<Category cat="HTML"></Category>}></Route>
         <Route path='/category/css' element={<Category cat="CSS"></Category>}></Route>
         <Route path='/category/javascript' element={<Category cat="JAVASCRIPT"></Category>}></Route>
+        <Route path='/savednotes' element={<Savenotes/>}></Route>
 
       </Routes>
       
