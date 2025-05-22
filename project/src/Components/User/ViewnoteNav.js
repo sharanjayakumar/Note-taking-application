@@ -2,15 +2,21 @@ import React from 'react'
 import logo from '../../Assets/Notehublogo.JPG'
 import profileIcon from '../../Assets/profile_icon.png'
 import { Link } from 'react-router-dom'
-function ViewnoteNav() {
+import { useRef } from 'react'
+function ViewnoteNav({setSearch}) {
+  const inputRef=useRef()
+    function handlesearch(e){
+      e.preventDefault();
+      setSearch(inputRef.current.value)
+    }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/dashboard">
-            <img src={logo} alt="Logo" width="40" height="40" className="d-inline-block align-text-top" />
+            <img src={logo} alt="Logo" width="60" height="60" className="d-inline-block align-text-top" />
           </Link>
-          <li style={{listStyle:"none"}} class="nav-item dropdown">
+          <li style={{listStyle:"none"}} class="nav-item dropdown mx-4">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               CATEGORIES
@@ -24,6 +30,12 @@ function ViewnoteNav() {
               <li><Link to={'/category/javascript'} class="dropdown-item">JAVASCRIPT</Link></li>
             </ul>
           </li>
+
+          <form class="d-flex">
+            <input ref={inputRef} class="form-control me-2" type="search" placeholder="Search" aria-label="Search" ></input>
+            <button class="btn btn-primary" type="submit" onClick={handlesearch}>Search</button>
+          </form>
+
           <div className="d-flex ms-auto">
             <Link to="/viewprofile">
               <img src={profileIcon} alt="Profile" width="40" height="40" className="rounded-circle" />

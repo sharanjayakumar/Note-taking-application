@@ -7,9 +7,10 @@ import ViewnoteNav from './ViewnoteNav'
 
 function Viewnotes() {
     const [data, setData] = useState([])
+    const [search,setSearch]=useState([])
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get('http://localhost:3000/userviewnote', {
+        axios.get(`http://localhost:3000/userviewnote?title=${search}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -21,10 +22,10 @@ function Viewnotes() {
             .catch((err) => {
                 console.log("Error fetching notes:", err);
             });
-    }, []);
+    }, [search]);
     return (
         <div>
-            <ViewnoteNav/>
+            <ViewnoteNav setSearch = {setSearch}/>
             <div class="container">
                 <center><h1>NOTES</h1></center><br></br>
                 <div class="row">
