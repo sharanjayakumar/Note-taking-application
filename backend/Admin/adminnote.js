@@ -39,7 +39,7 @@ router.get("/viewnote",async (req,res)=>{
     }
     
     else{
-        const notes=await notemodel.find({title:{$regex:req.query.title,$options:"i"}}).exec()
+        const notes=await notemodel.find({title:{$regex:req.query.title,$options:"i"}}).populate("user","username").select("-password").exec()
         res.json(notes)
     }
         

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import Navbar from './Navbar';
 
 function ViewDetailednotes() {
     const { id } = useParams();
@@ -34,6 +35,7 @@ function ViewDetailednotes() {
 };
   return (
     <div>
+        <Navbar/>
        <div class="container">
                 <center><h1>DETAILED NOTES</h1></center><br></br>
                 <div class="row">

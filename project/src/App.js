@@ -20,7 +20,7 @@ import Validatenotes from './Components/Admin/Validatenotes';
 import Detailedview from './Components/User/Detailedview';
 import Viewprofile from './Components/User/Viewprofile';
 import Editprofile from './Components/User/Editprofile';
-import Category from './Components/Admin/Category';
+import Category from './Components/Common/Category';
 import Savenotes from './Components/User/Savenotes';
 
 

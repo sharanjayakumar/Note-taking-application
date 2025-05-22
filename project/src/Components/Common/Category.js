@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from './Navbar'
+import Navbar from '../Admin/Navbar'
 
 function Category({cat}) {
     const [datas,setDatas]=useState([])
