@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function Navbar() {
+function Navbar({setSearch}) {
+  const inputRef=useRef()
+  function handlesearch(e){
+    e.preventDefault();
+    setSearch(inputRef.current.value)
+  }
   return (
     <div>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,19 +29,19 @@ function Navbar() {
             CATEGORIES
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">C</a></li>
-            <li><a class="dropdown-item" href="#">JAVA</a></li>
-            <li><a class="dropdown-item" href="#">PYTHON</a></li>
-            <li><a class="dropdown-item" href="#">HTML</a></li>
-            <li><a class="dropdown-item" href="#">CSS</a></li>
-            <li><a class="dropdown-item" href="#">JAVASCRIPT</a></li>
+            <li><Link to={'/category/c'} class="dropdown-item"  style={{textDecoration:"none"}}>C</Link></li>
+            <li><Link to={'/category/java'} class="dropdown-item" >JAVA</Link></li>
+            <li><Link to={"/category/python"}class="dropdown-item">PYTHON</Link></li>
+            <li><Link to={'/category/html'} class="dropdown-item">HTML</Link></li>
+            <li><Link to={'/category/css'}class="dropdown-item">CSS</Link></li>
+            <li><Link to={'/category/javascript'} class="dropdown-item">JAVASCRIPT</Link></li>
           </ul>
         </li>
       </ul>
 
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-        <button class="btn btn-primary" type="submit">Search</button>
+        <input ref={inputRef} class="form-control me-2" type="search" placeholder="Search" aria-label="Search" ></input>
+        <button class="btn btn-primary" type="submit" onClick={handlesearch}>Search</button>
       </form>
 
     </div>

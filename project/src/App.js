@@ -20,9 +20,9 @@ import Validatenotes from './Components/Admin/Validatenotes';
 import Detailedview from './Components/User/Detailedview';
 import Viewprofile from './Components/User/Viewprofile';
 import Editprofile from './Components/User/Editprofile';
-
-
-
+import Category from './Components/Admin/Category';
+import Savenotes from './Components/User/Savenotes';
+import Viewmynotes from './Components/User/Viewmynote';
 
 function App() {
   return (
@@ -48,6 +48,14 @@ function App() {
         <Route path='/userdetailednote/:id' element={<Detailedview></Detailedview>}></Route>
         <Route path='/viewprofile' element={<Viewprofile></Viewprofile>}></Route>
         <Route path='/editprofile' element={<Editprofile></Editprofile>}></Route>
+        <Route path='/category/c' element={<Category cat="C"></Category>}></Route>
+        <Route path='/category/java' element={<Category cat="JAVA"></Category>}></Route>
+        <Route path='/category/python' element={<Category cat="PYTHON"></Category>}></Route>
+        <Route path='/category/html' element={<Category cat="HTML"></Category>}></Route>
+        <Route path='/category/css' element={<Category cat="CSS"></Category>}></Route>
+        <Route path='/category/javascript' element={<Category cat="JAVASCRIPT"></Category>}></Route>
+        <Route path='/savednotes' element={<Savenotes/>}></Route>
+        <Route path = '/viewmynote' element = {<Viewmynotes/>}></Route>
       </Routes>
       
     </div>

@@ -149,3 +149,7 @@ textarea {
 .cat{
   padding-top:5px;
 }
+.dropdown-item{
+  text-decoration: none;
+}
+

@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import axios from 'axios'
-import Navbar from "./Navbar";
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import ViewnoteNav from './ViewnoteNav'
 
-function Viewnotes() {
+function Viewmynotes() {
     const [data, setData] = useState([])
-    const [search,setSearch]=useState([])
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`http://localhost:3000/viewnote?title=${search}`, {
+        axios.get('http://localhost:3000/userviewmynote', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -22,11 +21,10 @@ function Viewnotes() {
             .catch((err) => {
                 console.log("Error fetching notes:", err);
             });
-    }, [search]);
-    
+    }, []);
     return (
         <div>
-            <Navbar setSearch={setSearch} />
+            <ViewnoteNav/>
             <div class="container">
                 <center><h1>NOTES</h1></center><br></br>
                 <div class="row">
@@ -36,16 +34,11 @@ function Viewnotes() {
                                 <div class="card-body">
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>
-                                     <p class="card-text"><b>Category:</b> {e.category}</p>
-                                    <p class="card-text">{e.description}..</p>
-                                    <p className="card-text">
-                                        Posted by <strong>
-                                           {e.user ? e.user?.username :"Admin"}
-                                        </strong>
+                                    <p class="card-text">{e.description}</p>
+                                    <p className='card-text'>
+                                        Posted by <strong>{e.user? e.user?.username:"admin"}</strong>
                                     </p>
-                                    <Link class="btn btn-primary" to={`/admin-viewdetailnotes/${e._id}`}>View more</Link>
-                                    
-                                    
+                                    <Link to={`/userdetailednote/${e._id}`} class="btn btn-primary">View more</Link>
                                 </div>
                             </div>
                         </div>
@@ -58,4 +51,4 @@ function Viewnotes() {
     )
 }
 
-export default Viewnotes
+export default Viewmynotes
