@@ -68,10 +68,10 @@ function Detailedview() {
             </div>
             <br></br>
             <center>
-                <Link to='/userviewnote' class="btn btn-primary">BACK</Link>
-                <Link class="btn btn-primary" to={`/usereditnote/${data._id}`} style={{marginLeft:"20px"}}>EDIT</Link>
-                <button onClick={()=>userdelete(data._id)} className="btn btn-primary" to='/usereditnote' style={{marginLeft:"20px"}}>DELETE</button>
+                {data.user? <Link class="btn btn-primary" to={`/usereditnote/${data._id}`} style={{marginLeft:"20px"}}>EDIT</Link>:<p></p>}
+                {data.user? <button onClick={()=>userdelete(data._id)} className="btn btn-primary" to='/usereditnote' style={{marginLeft:"20px"}}>DELETE</button>:<p></p>}
                <button class="btn btn-primary" style={{marginLeft:"20px"}} onClick={()=>savednote(data._id)} >SAVE</button>
+                <Link to='/userviewnote' class="btn btn-primary" style={{marginLeft:"20px"}}>BACK</Link>
             </center> 
         </div>
   )

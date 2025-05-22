@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import ViewnoteNav from './ViewnoteNav';
 
 function Savenotes() {
     const [data, setData] = useState([])
@@ -21,6 +22,7 @@ function Savenotes() {
         }, []);
   return (
     <div>
+        <ViewnoteNav />
        <div class="container">
                 <center><h1>SAVED NOTES</h1></center><br></br>
                 <div class="row">

@@ -88,9 +88,18 @@ router.post("/useraddnote", async (req, res) => {
     }
 });
 router.put("/user-editnote/:id", async (req, res) => {
+     if (!req.headers.authorization) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    const token = req.headers.authorization.slice(7);
+    const data = jwt.verify(token, process.env.JWT_KEY);
     const cid = req.params.id;
-    let value = await notes.findByIdAndUpdate(cid, { title: req.body.title, subtitle: req.body.subtitle, category: req.body.category, description: req.body.description }, { new: true })
-    res.send(value)
+    if(data.id)
+    {
+        let value = await notes.findByIdAndUpdate(cid, { title: req.body.title, subtitle: req.body.subtitle, category: req.body.category, description: req.body.description }, { new: true })
+        res.send(value)
+    }
+    
 })
 router.delete("/userdeletenote/:id", async (req, res) => {
     try {
