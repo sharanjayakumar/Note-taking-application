@@ -1,9 +1,6 @@
 .l
 {
   text-align: center;
-  background-image: url(./Assets/login.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
   height:100vh;
   margin-top: 0px;
 }

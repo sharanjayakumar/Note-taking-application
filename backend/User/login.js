@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken")
 const userlogin = require("../Model/user")
 const { check, validationResult } = require('express-validator');
 const bcrypt=require("bcrypt")
+
 router.get("/userlogin", async (req, res) => {
     let user = await userlogin.find().exec()
     res.json(user)

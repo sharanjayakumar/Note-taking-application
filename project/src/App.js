@@ -23,6 +23,8 @@ import Editprofile from './Components/User/Editprofile';
 import Category from './Components/Common/Category';
 import Savenotes from './Components/User/Savenotes';
 import Viewmynotes from './Components/User/Viewmynote';
+import Otp from './Components/User/Otp';
+import Resetpass from './Components/User/Resetpass';
 
 function App() {
   return (
@@ -56,6 +58,8 @@ function App() {
         <Route path='/category/javascript' element={<Category cat="JAVASCRIPT"></Category>}></Route>
         <Route path='/savednotes' element={<Savenotes/>}></Route>
         <Route path = '/viewmynote' element = {<Viewmynotes/>}></Route>
+        <Route path = '/otp' element={<Otp/>}></Route>
+        <Route path='/resetpwd' element={<Resetpass/>}></Route>
       </Routes>
       
     </div>
