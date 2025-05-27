@@ -40,6 +40,10 @@ router.get("/viewnote",async (req,res)=>{
     
     else{
         const notes=await notemodel.find({title:{$regex:req.query.title,$options:"i"}}).populate("user","username").select("-password").exec()
+         if(notes.length==0)
+         {
+              res.status(400).json({message:"No result found"})
+         }
         res.json(notes)
     }
         
@@ -56,8 +60,23 @@ router.get("/viewuser",async (req,res)=>{
         return;
     }
     let data=jwt.verify(token,process.env.JWT_KEY)
-    const viewusers=await viewuser.find().populate().select("-password")
-    res.json(viewusers);
+    if(!req.query && !req.query.username)
+    {
+         const viewusers=await viewuser.find().populate().select("-password")
+         res.json(viewusers);
+    }
+    else{
+         const viewusers=await viewuser.find({username:{$regex:req.query.username,$options:"i"}}).populate().select("-password")
+         if(viewusers.length==0)
+         {
+              res.status(400).json({message:"No result found"})
+         }
+         else{
+                 res.json(viewusers);
+         }
+        
+    }
+   
 })
 router.post("/addnote",async (req,res)=>{
     if(!req.headers.authorization){
@@ -123,7 +142,7 @@ router.get("/reject",async (req,res)=>{
     }
      const token=req.headers.authorization.slice(7)
     let data=jwt.verify(token,process.env.JWT_KEY)
-    let value=await notemodel.find({approved:false}).exec()
+    let value=await notemodel.find({approved:false}).populate("username").select("-password").exec()
     res.send(value)
 })
 router.put("/approve/:id",async (req,res)=>{
@@ -169,7 +188,7 @@ router.get("/category/:cat",async (req,res)=>{
      const token=req.headers.authorization.slice(7)
     console.log(token)
     let data=jwt.verify(token,process.env.JWT_KEY)
-    let value=await notemodel.find({category:req.params.cat}).populate("user","username").select("-password");
+    let value=await notemodel.find({category:req.params.cat,title:{$regex:req.query.title,$options:"i"}}).populate("user","username").select("-password");
     res.send(value);
 })
 

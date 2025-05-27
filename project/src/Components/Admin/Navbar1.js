@@ -1,16 +1,15 @@
-import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef } from 'react'
+import { Link } from 'react-router-dom';
 import logo from "../../Assets/Notehublogo.JPG"
 
-function Navbar({setSearch}) {
-  const inputRef=useRef()
-  function handlesearch(e){
-    e.preventDefault();
-    setSearch(inputRef.current.value)
-  }
+function Navbar1({setSearchs}) {
+    const inputRef=useRef()
+      function handlesearch(e){
+        e.preventDefault();
+        setSearchs(inputRef.current.value)
+      }
   return (
-    <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div>  <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <img src={logo} height={"80px"} width={"80px"}></img>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -48,10 +47,8 @@ function Navbar({setSearch}) {
 
     </div>
   </div>
-</nav>
-
-    </div>
+</nav></div>
   )
 }
 
-export default Navbar
+export default Navbar1
