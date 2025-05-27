@@ -5,9 +5,10 @@ import Navbar from '../Admin/Navbar'
 
 function Category({cat}) {
     const [datas,setDatas]=useState([])
+     const [search,setSearch]=useState([])
     useEffect(()=>{
         const token=localStorage.getItem("token")
-        axios.get(`http://localhost:3000/category/${cat}`,{
+        axios.get(`http://localhost:3000/category/${cat}/?title=${search}`,{
             headers:{Authorization:`Bearer ${token}`}
         })
         .then((res)=>{
@@ -16,10 +17,10 @@ function Category({cat}) {
         .catch((err)=>{
             console.log(err)
         })
- },[cat])
+ },[cat,search])
   return (
     <div>
-        <Navbar/>
+        <Navbar setSearch={setSearch}/>
         <div class="container">
                         <center><h1>NOTES</h1></center><br></br>
                         <div class="row">

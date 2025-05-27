@@ -20,7 +20,7 @@ router.get("/userviewnote", async (req, res) => {
     if(!req.query && !req.query.title)
     {
         try {
-            const note = await notes.find().populate("user", "username").select("-password")
+            const note = await notes.find({approved:true}).populate("user", "username").select("-password")
             res.json(note)
         }
         catch (err) {
@@ -47,7 +47,7 @@ router.get("/userviewmynote", async (req, res) => {
     console.log(data.username)
     console.log(data.id)
     try {
-        const note = await notes.find({user:data.id}).populate("user", "username").select("-password")
+        const note = await notes.find({user:data.id,approved:true}).populate("user", "username").select("-password")
         res.json(note)
     }
     catch (err) {

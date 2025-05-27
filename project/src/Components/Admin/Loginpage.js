@@ -46,7 +46,7 @@ function Loginpage() {
     <div className="col-lg-6 col-md-6 col-12 order-2 order-sm-1">
       <img src={image} alt="Login Visual" className="img-fluid" style={{ maxWidth: '100%',height:"100vh" }} />
     </div>
-    <div className="col-lg-6 col-md-6 col-12 order-1 order-sm-2">
+    <div className="col-lg-6 col-md-6 col-12 order-1 order-sm-2 form-login">
       <form className=" p-4 shadow rounded bg-white" onSubmit={validate}>
         <h3 className="text-center mb-4">ADMIN</h3>
         <center>
@@ -74,7 +74,7 @@ function Loginpage() {
         </div>
         </center>
         <div className="d-grid">
-          <button className="btn btn-primary" type="submit">LOGIN</button>
+          <button className="btn btn-primary w-25 mx-auto" type="submit">LOGIN</button>
         </div>
       </form>
     </div>

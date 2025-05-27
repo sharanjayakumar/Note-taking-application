@@ -1,28 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
+import Navbar1 from './Navbar1'
 
 function Viewusers() {
   const [data, setData] = useState([])
-
+  const [search,setSearchs]=useState([])
   useEffect(() => {
     const token = localStorage.getItem("token")
-    axios.get('http://localhost:3000/viewuser', {
+    axios.get(`http://localhost:3000/viewuser?username=${search}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
       .then((res) => {
-        setData(res.data)
+           setData(res.data)
+       
       })
       .catch((err) => {
+        alert("No result found")
         console.log(err)
       })
-  }, [])
-
+  }, [search])
+  
   return (
     <div>
-      <Navbar />
+      <Navbar1 setSearchs={setSearchs}/>
       <br></br>
       <center>
       <table  style={{
