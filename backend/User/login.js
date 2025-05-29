@@ -1,4 +1,5 @@
 const express = require("express")
+const nodemailer = require("nodemailer")
 const router = express.Router()
 const jwt = require("jsonwebtoken")
 const userlogin = require("../Model/user")
@@ -74,8 +75,45 @@ router.post("/verify-email",async(req,res)=>{
         res.status(400).send({message:"invalid email"})
     }
     else{
-          const token = jwt.sign({ username: user.username, id: user._id ,role: user.role}, process.env.JWT_KEY);
-                res.send({ token })
+        const generateOtp = ()=> new Promise(res=>
+        crypto.randomBytes(3,(err,buffer)=>{
+            res(parseInt(buffer.toString("hex"),16).toString().substring(0,6)
+        )
+        })
+    )
+    try
+    {
+        const otp = await generateOtp()
+        console.log(otp)
+        res.json({otp})
+        userlogin.save(otp)
+    }
+    catch(err)
+    {
+        res.status(500).json({error:"Failed to generate OTP"})
+    }
+          const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.email",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+});
+
+// Wrap in an async IIFE so we can use await.
+(async () => {
+  const info = await transporter.sendMail({
+    from: '"Sharan J" <sharanjayakumar2002@gmail.com>',
+    to: userlogin.email,
+    subject: "OTP",
+    text: "Your otp is ", // plain‑text body
+    html: `<b>{otp}</b>`, // HTML body
+  });
+
+  console.log("Message sent:", info.messageId);
+})();
     }
 })
 router.put("/updateprofile/:id",async(req,res)=>{
@@ -97,24 +135,6 @@ router.get("/viewprofile",async(req,res)=>{
             const data = jwt.verify(token, process.env.JWT_KEY);
             const user = await userlogin.findById(data.id);
             res.send(user);
-})
-router.get("/generateotp",async(req,res)=>{
-    const generateOtp = ()=> new Promise(res=>
-        crypto.randomBytes(3,(err,buffer)=>{
-            res(parseInt(buffer.toString("hex"),16).toString().substring(0,6)
-        )
-        })
-    )
-    try
-    {
-        const otp = await generateOtp()
-        console.log(otp)
-        res.json({otp})
-    }
-    catch(err)
-    {
-        res.status(500).json({error:"Failed to generate OTP"})
-    }
 })
 router.put("/editprofile",async(req,res)=>{
     console.log(req.body)
