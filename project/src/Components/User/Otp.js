@@ -6,14 +6,14 @@ function Otp() {
     const [otp,setOtp]=useState('');
     useEffect(()=>{
         const token = localStorage.getItem("token")
-        axios.get("http://localhost:3000/generateotp",{header:{Authorization:`Bearer ${token}`}})
+        axios.get("http://localhost:3000/generateotp",{headers:{Authorization:`Bearer ${token}`}})
         .then((res)=>{
-            setOtp(res.data)
+            setOtp(res.data.otp)
         })
         .catch((err)=>{
             console.log("Failed to fetch otp")
         })
-    })
+    },[])
   return (
     <div>
         <center>

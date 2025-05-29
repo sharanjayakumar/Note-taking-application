@@ -69,7 +69,7 @@ router.post("/userlogin/verify", async (req, res) => {
 })
 router.post("/verify-email",async(req,res)=>{
     const user=await userlogin.findOne({email:req.body.email})
-    if(!email)
+    if(!user)
     {
         res.status(400).send({message:"invalid email"})
     }
@@ -101,13 +101,14 @@ router.get("/viewprofile",async(req,res)=>{
 router.get("/generateotp",async(req,res)=>{
     const generateOtp = ()=> new Promise(res=>
         crypto.randomBytes(3,(err,buffer)=>{
-            res(parseInt(buffer.toString("hex"),16).toString().substr(0,6)
+            res(parseInt(buffer.toString("hex"),16).toString().substring(0,6)
         )
         })
     )
     try
     {
         const otp = await generateOtp()
+        console.log(otp)
         res.json({otp})
     }
     catch(err)
@@ -125,5 +126,22 @@ router.put("/editprofile",async(req,res)=>{
         let value = await userlogin.findByIdAndUpdate(data.id,{username:req.body.username,email:req.body.email,phno:req.body.phno})
         res.send(value);
 
+})
+router.post("/resetpass",async(req,res)=>{
+     if (!req.headers.authorization) {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        const token = req.headers.authorization.slice(7);
+        const data = jwt.verify(token, process.env.JWT_KEY);
+    const {email,password}=req.body;
+    const hash = await bcrypt.hash(password, 10);
+    const result=await userlogin.findOneAndUpdate({email},{password:hash},{new:true})
+     if (!result) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    else{
+        res.json({ message: 'Password updated successfully' });
+    }
+    
 })
 module.exports=router;
