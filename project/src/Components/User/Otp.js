@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios'
 function Otp() {
     let navigate = useNavigate();
+    const [otp,setOtp]=useState('');
+    useEffect(()=>{
+        const token = localStorage.getItem("token")
+        axios.get("http://localhost:3000/generateotp",{header:{Authorization:`Bearer ${token}`}})
+        .then((res)=>{
+            setOtp(res.data)
+        })
+        .catch((err)=>{
+            console.log("Failed to fetch otp")
+        })
+    })
   return (
     <div>
         <center>
@@ -13,6 +24,8 @@ function Otp() {
                     id="user"
                     className="form-control w-50"
                     placeholder="Enter the six digit otp"
+                    value={otp}
+                    onChange={(e)=>setOtp(e.target.value)}
                 /><br/>
                 <button onClick={e=>{e.preventDefault();navigate('/resetpwd')}}>Confirm OTP</button>
             </form>
