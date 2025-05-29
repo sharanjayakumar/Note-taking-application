@@ -20,6 +20,7 @@ function Viewnotes() {
                 console.log("Notes fetched:", res.data);
             })
             .catch((err) => {
+                alert("No results found");
                 console.log("Error fetching notes:", err);
             });
     }, [search]);

@@ -65,6 +65,17 @@ router.post("/userlogin/verify", async (req, res) => {
     }
 
 })
+router.post("/verify-email",async(req,res)=>{
+    const user=await userlogin.findOne({email:req.body.email})
+    if(!email)
+    {
+        res.status(400).send({message:"invalid email"})
+    }
+    else{
+          const token = jwt.sign({ username: user.username, id: user._id ,role: user.role}, process.env.JWT_KEY);
+                res.send({ token })
+    }
+})
 router.put("/updateprofile/:id",async(req,res)=>{
         const cid=req.params.id;
         const hash = await bcrypt.hash(req.body.password, 10);
