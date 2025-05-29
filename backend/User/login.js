@@ -4,7 +4,9 @@ const jwt = require("jsonwebtoken")
 const userlogin = require("../Model/user")
 const { check, validationResult } = require('express-validator');
 const bcrypt=require("bcrypt")
-
+const crypto = require("crypto");
+const { buffer } = require("stream/consumers");
+const { error } = require("console");
 router.get("/userlogin", async (req, res) => {
     let user = await userlogin.find().exec()
     res.json(user)
@@ -84,6 +86,23 @@ router.get("/viewprofile",async(req,res)=>{
             const data = jwt.verify(token, process.env.JWT_KEY);
             const user = await userlogin.findById(data.id);
             res.send(user);
+})
+router.get("/generateotp",async(req,res)=>{
+    const generateOtp = ()=> new Promise(res=>
+        crypto.randomBytes(3,(err,buffer)=>{
+            res(parseInt(buffer.toString("hex"),16).toString().substr(0,6)
+        )
+        })
+    )
+    try
+    {
+        const otp = await generateOtp()
+        res.json({otp})
+    }
+    catch(err)
+    {
+        res.status(500).json({error:"Failed to generate OTP"})
+    }
 })
 router.put("/editprofile",async(req,res)=>{
     console.log(req.body)
