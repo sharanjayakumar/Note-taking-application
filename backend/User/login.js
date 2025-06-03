@@ -83,17 +83,16 @@ router.post("/verify-email",async(req,res)=>{
     )
     try
     {
-        const otp = await generateOtp()
-        console.log(otp)
-        res.json({otp})
-        userlogin.save(otp)
+       const otp = await generateOtp();
+        user.otp = otp;
+        await user.save();
     }
     catch(err)
     {
         res.status(500).json({error:"Failed to generate OTP"})
     }
           const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.email",
+  host: "smtp.gmail.com",
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
@@ -108,8 +107,8 @@ router.post("/verify-email",async(req,res)=>{
     from: '"Sharan J" <sharanjayakumar2002@gmail.com>',
     to: userlogin.email,
     subject: "OTP",
-    text: "Your otp is ", // plain‑text body
-    html: `<b>{otp}</b>`, // HTML body
+    text: `Your OTP is: ${otp}`, // plain‑text body
+    html: `<b>Your OTP is: ${otp}</b>`, // HTML body
   });
 
   console.log("Message sent:", info.messageId);
