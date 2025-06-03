@@ -143,18 +143,7 @@ router.put("/editprofile",async(req,res)=>{
         res.send(value);
 
 })
-router.post("/resetpass",async(req,res)=>{
-    const {email,password}=req.body;
-    const hash = await bcrypt.hash(password, 10);
-    const result=await userlogin.findOneAndUpdate({email},{password:hash},{new:true})
-     if (!result) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-    else{
-        res.json({ message: 'Password updated successfully' });
-    }
-    
-})
+
 router.post("/verify-otp", async (req, res) => {
     const { email, enteredOtp } = req.body;
     try {
@@ -174,4 +163,24 @@ router.post("/verify-otp", async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 });
+router.post("/resetpass",async(req,res)=>{
+    const {email,password}=req.body;
+    const hash = await bcrypt.hash(password, 10);
+    const user = await userlogin.findOne({ email });
+    if (!user.otp) {
+      return res.status(400).json({ error: "OTP not verified" });
+    }
+    const result = await userlogin.findOneAndUpdate(
+      { email },
+      { password: hash },
+      { new: true }
+    );
+
+    if (!result) {
+      return res.status(500).json({ error: "Password not updated" });
+    }
+
+    res.json({ message: "Password updated successfully" });
+  });
+
 module.exports=router;
