@@ -93,7 +93,7 @@ router.post("/verify-email",async(req,res)=>{
         res.status(500).json({error:"Failed to generate OTP"})
     }
           const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.email",
+  host: "smtp.gmail.com",
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
