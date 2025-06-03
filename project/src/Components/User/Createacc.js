@@ -88,7 +88,7 @@ function Createacc() {
         <Link to='/login'></Link>
         Create account
       </button>
-        <Link to='/login'><button className='w-50  butn' style={{backgroundColor:'blue',color:'white',marginLeft:"100px"}} variant="primary" type="submit"> Back </button></Link> 
+        <Link to='/login'><button className='w-50 butn' style={{backgroundColor:'blue',color:'white',marginLeft:"100px"}} variant="primary" type="submit"> Back </button></Link> 
      </div><br></br>
     </form>
     </div>
