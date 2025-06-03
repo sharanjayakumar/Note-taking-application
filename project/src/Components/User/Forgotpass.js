@@ -21,9 +21,9 @@ function Forgotpass() {
           {
             navigate("/otp")
             localStorage.setItem("token",res.data.token)
+             localStorage.setItem("email",input)
           }
-          
-          
+         
         })
         .catch((err)=>{
           if(err.status == 400)

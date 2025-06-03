@@ -8,6 +8,7 @@ const bcrypt=require("bcrypt")
 const crypto = require("crypto");
 const { buffer } = require("stream/consumers");
 const { error } = require("console");
+const {env}=require('dotenv').config();
 router.get("/userlogin", async (req, res) => {
     let user = await userlogin.find().exec()
     res.json(user)
@@ -81,17 +82,11 @@ router.post("/verify-email",async(req,res)=>{
         )
         })
     )
-    try
-    {
-        const otp = await generateOtp()
-        console.log(otp)
-        res.json({otp})
-        userlogin.save(otp)
-    }
-    catch(err)
-    {
-        res.status(500).json({error:"Failed to generate OTP"})
-    }
+    
+    const otp = await generateOtp();
+    console.log(otp)
+        user.otp = otp;
+        await user.save();
           const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -106,14 +101,15 @@ router.post("/verify-email",async(req,res)=>{
 (async () => {
   const info = await transporter.sendMail({
     from: '"Sharan J" <sharanjayakumar2002@gmail.com>',
-    to: userlogin.email,
+    to: user.email,
     subject: "OTP",
-    text: "Your otp is ", // plain‑text body
-    html: `<b>{otp}</b>`, // HTML body
+    text: `Your OTP is:`, // plain‑text body
+    html: `<b>Your OTP is: ${otp}</b>`, // HTML body
   });
 
   console.log("Message sent:", info.messageId);
 })();
+res.json("otp sent")
     }
 })
 router.put("/updateprofile/:id",async(req,res)=>{
@@ -148,11 +144,6 @@ router.put("/editprofile",async(req,res)=>{
 
 })
 router.post("/resetpass",async(req,res)=>{
-     if (!req.headers.authorization) {
-            return res.status(401).json({ message: "Unauthorized" });
-        }
-        const token = req.headers.authorization.slice(7);
-        const data = jwt.verify(token, process.env.JWT_KEY);
     const {email,password}=req.body;
     const hash = await bcrypt.hash(password, 10);
     const result=await userlogin.findOneAndUpdate({email},{password:hash},{new:true})
@@ -164,4 +155,23 @@ router.post("/resetpass",async(req,res)=>{
     }
     
 })
+router.post("/verify-otp", async (req, res) => {
+    const { email, enteredOtp } = req.body;
+    try {
+        const user = await userlogin.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "Invalid email" });
+        }
+        if (user.otp === Number(enteredOtp)) {
+            await user.save();
+            return res.status(200).json({ message: "OTP verified successfully" });
+        } else {
+            return res.status(400).json({ message: "Invalid OTP" });
+        }
+
+    } catch (err) {
+        console.error("Error verifying OTP:", err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
 module.exports=router;

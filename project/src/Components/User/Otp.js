@@ -3,34 +3,38 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 function Otp() {
     let navigate = useNavigate();
-    const [otp,setOtp]=useState('');
-    useEffect(()=>{
-        const token = localStorage.getItem("token")
-        axios.get("http://localhost:3000/generateotp",{headers:{Authorization:`Bearer ${token}`}})
-        .then((res)=>{
-            setOtp(res.data.otp)
-        })
-        .catch((err)=>{
-            console.log("Failed to fetch otp")
-        })
-    },[])
+    const [enteredOtp, setEnteredOtp] = useState("");
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+       const email = localStorage.getItem("email");
+    axios.post("http://localhost:3000/verify-otp", {
+        email,
+        enteredOtp
+    })
+    .then(res => {
+        alert("OTP verified!");
+        navigate("/resetpwd");
+    })
+    .catch(err => {
+        alert("Invalid OTP");
+    });
+    }
   return (
     <div>
         <center>
-            <form className='my-5'>
+            <form className='my-5' onSubmit={handleSubmit}>
                 <h4>You would have recieved an OTP to your registered email or phone number</h4><br/>
                 <input
                     type="text"
                     id="user"
                     className="form-control w-50"
                     placeholder="Enter the six digit otp"
-                    value={otp}
-                    onChange={(e)=>setOtp(e.target.value)}
+                    value={enteredOtp}
+                    onChange={(e)=>setEnteredOtp(e.target.value)}
                 /><br/>
-                <button onClick={e=>{e.preventDefault();navigate('/resetpwd')}}>Confirm OTP</button>
+                <button type="submit">Confirm OTP</button>
             </form>
         </center>
-        
     </div>
   )
 }
