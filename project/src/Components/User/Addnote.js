@@ -29,7 +29,14 @@ function Addnote() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", data);
+     setDatas({
+      title: "",
+      subtitle: "",
+      category: "",
+      description: ""
+    });
     addnote();
+   
   };
 
   return (

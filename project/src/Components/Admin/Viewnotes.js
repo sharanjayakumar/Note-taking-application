@@ -33,7 +33,7 @@ function Viewnotes() {
                 <div class="row">
                     {data.map((e) => (
                         <div className="col-lg-4 col-md-6 col-12 mb-3">
-                            <div class="card">
+                            <div class="card" style={{height: "350px"}}>
                                 <div class="card-body">
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>
