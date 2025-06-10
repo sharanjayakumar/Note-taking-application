@@ -3,16 +3,13 @@ import axios from 'axios'
 import { Link,useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Nav from './Nav'
+import instance from '../../Utils/axios'
 function Detailedview() {
     const { id } = useParams()
     const [data, setData] = useState([])
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`http://localhost:3000/userviewnote/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        instance.get(`/userviewnote/${id}`)
             .then((res) => {
                 setData(res.data);
                 console.log("Notes fetched:", res.data);
@@ -27,7 +24,7 @@ function Detailedview() {
         {return;}
         try{
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:3000/userdeletenote/${id}`,{headers:{Authorization:`Bearer ${token}`}})
+            await instance.delete(`/userdeletenote/${id}`)
             alert("Note deleted successfully")
         }
         catch(err){
@@ -38,7 +35,7 @@ function Detailedview() {
     const savednote=async(id)=>{
         try{
             const token = localStorage.getItem("token");
-            await axios.post(`http://localhost:3000/savenote/${id}`,{},{headers:{Authorization:`Bearer ${token}`}})
+            await instance.post(`/savenote/${id}`,{})
             alert("Note saved successfully")
         }
         catch(err){

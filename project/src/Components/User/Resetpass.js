@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import instance from '../../Utils/axios';
 
 function Resetpass() {
   const [pass, setPass] = useState("");
@@ -14,7 +15,7 @@ function Resetpass() {
       }
       else {
         const email = localStorage.getItem("email");
-        axios.post("http://localhost:3000/resetpass",
+       instance.post("/resetpass",
           { email, password: pass })
           .then((res)=>{
           if(res.data)

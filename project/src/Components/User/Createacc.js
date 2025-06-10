@@ -1,27 +1,36 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Nav from './Nav'
 import Createnav from './Createnav'
+import instance from '../../Utils/axios'
 function Createacc() {
-  const [data,userdata]=useState({username:"",email:"",password:"",cpasswd:"",phno:""})
+  const navigate=useNavigate()
+  const [data,userdata]=useState({username:"",email:"",password:"",cpasswd:"",phno:"",image:null})
   const handlechange = (e)=>{
     userdata({ ...data, [e.target.name]: e.target.value })
   }
   const addUser = async()=>{
     try {
     var token = localStorage.getItem("token")
-    await axios.post('http://localhost:3000/userlogin/register',{
-      username:data.username,
-      email:data.email,
-      password:data.password,
-      phno:data.phno
-      },{headers:{Authorization:`Bearer ${token}`}})
+    const formData=new FormData()
+    formData.append("username",data.username)
+    formData.append("email",data.email)
+    formData.append("password",data.password)
+    formData.append("phno",data.phno)
+    formData.append("profile",data.image)
+    await instance.post('/userlogin/register',formData,
+      {headers:{"Content-Type":"multipart/form-data"}})
       alert("User added successfully")
+      navigate("/login")
     }
     catch{
       alert("Error")
     }
+  } 
+  const handleFile=(e)=>{
+     userdata({ ...data,image:e.target.files[0]})
+
   }
     const handleSubmit=(e)=>{
       
@@ -82,6 +91,10 @@ function Createacc() {
       <form className="mb-3 mx-auto" controlId="formBasicNumber">
         <label className='text-center w-100'>Phone Number</label> 
         <center><input onChange={handlechange} name='phno' style={{width:'300px'}} className='mx-auto' type="number" placeholder="Your 10 digit number" /></center><br/>
+        </form>
+        <form className="mb-3 mx-auto" controlId="formBasicNumber">
+        <label className='text-center w-100'>Profile image</label> 
+        <center><input  onChange ={handleFile} name='image' style={{width:'300px'}} className='mx-auto' type="file" /></center><br/>
         </form>
         <div className="button-group"> 
       <button className='w-25 butn' style={{backgroundColor:'blue',color:'white',marginLeft:"160px"}} variant="primary" type="submit">

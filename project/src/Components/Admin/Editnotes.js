@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import instance from '../../Utils/axios';
 
 function Editnotes() {
     const [data, setData] = useState({ title: "", subtitle: "", category: "", description: "" });
@@ -14,9 +15,7 @@ function Editnotes() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`http://localhost:3000/viewnote/${id}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+        instance.get(`/viewnote/${id}`)
         .then((res) => {
             setData(res.data);
             console.log("Notes fetched:", res.data);
@@ -26,9 +25,7 @@ function Editnotes() {
     const editnote = async (id) => {
         try {
             const token = localStorage.getItem("token");
-            await axios.put(`http://localhost:3000/editnote/${id}`, data, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            await instance.put(`/editnote/${id}`, data);
             alert("Note updated successfully");
             navigate('/admin-viewnote')
         } catch (err) {

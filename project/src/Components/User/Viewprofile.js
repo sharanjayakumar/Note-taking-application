@@ -3,15 +3,12 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Createnav from './Createnav';
+import instance from '../../Utils/axios';
 function Viewprofile() {
     const [profile, setProfile] = useState({});
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`http://localhost:3000/viewprofile`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        instance.get(`/viewprofile`)
             .then((res) => {
                 setProfile(res.data);
                 console.log("Profile details gathered:", res.data);

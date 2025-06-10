@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import instance from '../../Utils/axios';
 function Otp() {
     let navigate = useNavigate();
     const [enteredOtp, setEnteredOtp] = useState("");
     const handleSubmit=(e)=>{
         e.preventDefault();
        const email = localStorage.getItem("email");
-    axios.post("http://localhost:3000/verify-otp", {
+    instance.post("/verify-otp", {
         email,
         enteredOtp
     })

@@ -2,17 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
 import Navbar1 from './Navbar1'
+import instance from '../../Utils/axios'
 
 function Viewusers() {
   const [data, setData] = useState([])
   const [search,setSearchs]=useState([])
   useEffect(() => {
     const token = localStorage.getItem("token")
-    axios.get(`http://localhost:3000/viewuser?username=${search}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    instance.get(`/viewuser?username=${search}`)
       .then((res) => {
            setData(res.data)
        
@@ -28,8 +25,7 @@ function Viewusers() {
     if(!confirmDelete) return;
     try{
       const token=localStorage.getItem("token");
-      await axios.delete(`http://localhost:3000/delete-user/${id}`,{
-            headers: { Authorization: `Bearer ${token}` }});
+      await instance.delete(`/delete-user/${id}`);
             alert("User deleted successfully");
     }
      catch (err) {

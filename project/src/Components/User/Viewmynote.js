@@ -4,16 +4,12 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ViewnoteNav from './ViewnoteNav'
+import instance from '../../Utils/axios'
 
 function Viewmynotes() {
     const [data, setData] = useState([])
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        axios.get('http://localhost:3000/userviewmynote', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+        instance.get('/userviewmynote')
             .then((res) => {
                 setData(res.data);
                 console.log("Notes fetched:", res.data);

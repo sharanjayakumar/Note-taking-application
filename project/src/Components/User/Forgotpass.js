@@ -3,6 +3,7 @@ import woman_thinking from '../../Assets/woman_thinking_forgotpass.jpg';
 import man_thinking from '../../Assets/man_thinking_forgotpass.JPG';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import instance from '../../Utils/axios';
 function Forgotpass() {
   let navigate = useNavigate()
   const [input,setInput]=useState("")
@@ -14,7 +15,7 @@ function Forgotpass() {
     }
     else{
       const userlogin = async()=>{
-        axios.post("http://localhost:3000/verify-email",{
+       instance.post("/verify-email",{
           email:input
         }).then((res)=>{
           if(res.data)

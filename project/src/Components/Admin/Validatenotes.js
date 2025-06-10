@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import instance from '../../Utils/axios';
 
 function Validatenotes() {
     const [data, setDatas] = useState([]);
     const { id } = useParams()
     const token = localStorage.getItem("token")
     const validatenotes = async () => {
-        axios.get(`http://localhost:3000/reject`, { headers: { Authorization: `Bearer ${token}` } })
+        instance.get(`/reject`)
             .then((res) => {
                 setDatas(res.data);
                 
@@ -22,7 +23,7 @@ function Validatenotes() {
         validatenotes()
     },[])
     const approve = async (id) => {
-        axios.put(`http://localhost:3000/approve/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+        instance.put(`/approve/${id}`)
             .then((res) => {
                 const filterData = data.filter((item) => {
                     return item._id != id
@@ -35,7 +36,7 @@ function Validatenotes() {
             });
     }
     const reject=async(id)=>{
-        await axios.delete(`http://localhost:3000/delete/reject/${id}`,{headers:{Authorization:`Bearer ${token}`}})
+        await instance.delete(`/delete/reject/${id}`)
         .then((res) => {
                 const filterData = data.filter((item) => {
                     return item._id != id
@@ -66,7 +67,7 @@ function Validatenotes() {
                                 </strong>
                             </p>
                         </div>
-
+                        <br></br>
                         <br></br>
                         <div className="button-group">
                             <button type="submit" className="bttn mx-3" onClick={() => approve(e._id)}>ACCEPT</button>

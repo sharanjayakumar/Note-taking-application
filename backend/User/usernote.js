@@ -29,7 +29,7 @@ router.get("/userviewnote", async (req, res) => {
     }
     else
     {
-        const note = await notes.find({title:{$regex:req.query.title,$options:"i"}}).populate("user","username").select("-password").exec()
+        const note = await notes.find({title:{$regex:req.query.title,$options:"i"},approved:true}).populate("user","username").select("-password").exec()
         res.json(note)
     }
 });
@@ -137,5 +137,14 @@ router.get("/savednotes", async (req, res) => {
     const data = jwt.verify(token, process.env.JWT_KEY);
     const saved=await savednotes.find({user:data.id}).populate({ path: "notes", populate: { path: "user", select: "username" } })
     res.json(saved);
+})
+router.delete("/delete-savednote/:id",async(req,res)=>{
+    if (!req.headers.authorization) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+    const token = req.headers.authorization.slice(7);
+    const data = jwt.verify(token, process.env.JWT_KEY);
+    const delsaved=await savednotes.deleteOne({_id:req.params.id}).exec()
+    res.send({message:"Unsaved"})
 })
 module.exports = router;

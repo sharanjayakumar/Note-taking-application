@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Nav from "./Nav";
+import instance from "../../Utils/axios";
 
 function Addnote() {
+  const navigate=useNavigate()
   const [data, setDatas] = useState({ title: "", subtitle: "", category: "", description: "" });
 
   const handleChange = (e) => {
@@ -13,13 +15,15 @@ function Addnote() {
   const addnote = async () => {
     try {
       var token = localStorage.getItem("token");
-          await axios.post('http://localhost:3000/useraddnote', {
+          await instance.post('/useraddnote', {
           title: data.title,
           subtitle: data.subtitle,
           category: data.category,
           description: data.description
-        },{headers:{Authorization:`Bearer ${token}`}});
+        });
         alert("Note added successfully");
+        setDatas({title:"",subtitle:"",category:"",description:""})
+
     }
     catch(err){
       console.log("error", err);
@@ -29,12 +33,6 @@ function Addnote() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", data);
-     setDatas({
-      title: "",
-      subtitle: "",
-      category: "",
-      description: ""
-    });
     addnote();
    
   };
@@ -54,6 +52,7 @@ function Addnote() {
             placeholder="Enter title"
             name="title"
             onChange={handleChange}
+            value={data.title}
           />
 
           <label htmlFor="subtitle">SUB TITLE (optional):</label>
@@ -63,32 +62,33 @@ function Addnote() {
             placeholder="Enter subtitle"
             name="subtitle"
             onChange={handleChange}
+            value={data.subtitle}
           />
 
           <label>CATEGORY:</label>
           <div className="radio-group">
             <div>
-              <input type="radio" id="c" value="C" name="category" onChange={handleChange} />
+              <input type="radio" id="c" value="C" name="category" onChange={handleChange} checked={data.category === "C"} />
               <label htmlFor="c">C</label>
             </div>
             <div>
-              <input type="radio" id="java" value="JAVA" name="category" onChange={handleChange} />
+              <input type="radio" id="java" value="JAVA" name="category" onChange={handleChange} checked={data.category === "JAVA"} />
               <label htmlFor="java">JAVA</label>
             </div>
             <div>
-              <input type="radio" id="python" value="PYTHON" name="category" onChange={handleChange} />
+              <input type="radio" id="python" value="PYTHON" name="category" onChange={handleChange} checked={data.category === "PYTHON"} />
               <label htmlFor="python">PYTHON</label>
             </div>
             <div>
-              <input type="radio" id="html" value="HTML" name="category" onChange={handleChange} />
+              <input type="radio" id="html" value="HTML" name="category" onChange={handleChange}  checked={data.category === "HTML"}/>
               <label htmlFor="html">HTML</label>
             </div>
             <div>
-              <input type="radio" id="css" value="CSS" name="category" onChange={handleChange} />
+              <input type="radio" id="css" value="CSS" name="category" onChange={handleChange} checked={data.category === "CSS"} />
               <label htmlFor="css">CSS</label>
             </div>
             <div>
-              <input type="radio" id="js" value="JAVASCRIPT" name="category" onChange={handleChange} />
+              <input type="radio" id="js" value="JAVASCRIPT" name="category" onChange={handleChange} checked={data.category === "JAVASCRIPT"}/>
               <label htmlFor="js">JAVASCRIPT</label>
             </div>
           </div>
@@ -98,6 +98,7 @@ function Addnote() {
             id="desc"
             name="description"
             onChange={handleChange}
+            value={data.description}
           ></textarea>
 
           <div className="button-group">

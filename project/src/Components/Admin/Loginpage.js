@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import image from '../../Assets/login.jpg'
+import instance from '../../Utils/axios';
 
 
 function Loginpage() {
@@ -9,7 +10,7 @@ function Loginpage() {
   const [pass, setPass] = useState('');
   const navigate = useNavigate();
   const login = async () => {
-    axios.post("http://localhost:3000/admin-login", {
+    instance.post("/admin-login", {
       username: user,
       password: pass
     }).then((res) => {

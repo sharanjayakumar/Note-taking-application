@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Navbar from "./Navbar";
+import instance from "../../Utils/axios";
 
 function Addnotes() {
+   const navigate=useNavigate();
   const [data, setDatas] = useState({ title: "", subtitle: "", category: "", description: "" });
 
   const handleChange = (e) => {
@@ -13,13 +15,16 @@ function Addnotes() {
   const addnote = async () => {
     try {
       var token = localStorage.getItem("token");
-          await axios.post('http://localhost:3000/addnote', {
+          await instance.post('/addnote', {
           title: data.title,
           subtitle: data.subtitle,
           category: data.category,
           description: data.description
-        },{headers:{Authorization:`Bearer ${token}`}});
+        });
         alert("Note added successfully");
+        setDatas({title:"",subtitle:"",category:"",description:""})
+       
+       
     }
     catch(err){
       console.log("error", err);
@@ -31,7 +36,6 @@ function Addnotes() {
     console.log("Form Data Submitted:", data);
     addnote();
   };
-
   return (
     <div>
       <Navbar/>

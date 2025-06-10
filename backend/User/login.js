@@ -9,16 +9,33 @@ const crypto = require("crypto");
 const { buffer } = require("stream/consumers");
 const { error } = require("console");
 const {env}=require('dotenv').config();
+
+var multer = require('multer');
+var path = require('path')
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+  }
+})
+
+var upload = multer({ storage: storage });
 router.get("/userlogin", async (req, res) => {
     let user = await userlogin.find().exec()
     res.json(user)
 })
+
 router.post("/userlogin/register", [
+     upload.single("profile"),
     check('email').isEmail().isLength({ min: 10, max: 30 }),
     check('phno').isLength({ min: 10, max: 10 }),
     check('password', 'Password length should be 8 to 10 characters')
         .isLength({ min: 8, max: 10 }),
-    check('username').isLength({ min: 4 })
+    check('username').isLength({ min: 4 }),
+   
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -36,7 +53,8 @@ router.post("/userlogin/register", [
             username: req.body.username,
             password: hash,
             phno:req.body.phno,
-            email:req.body.email
+            email:req.body.email,
+            profile:req.file.filename
         });
 
         await login.save();
@@ -46,6 +64,7 @@ router.post("/userlogin/register", [
         return res.status(500).send({ message: "Server error" });
     }
 });
+
 router.post("/userlogin/verify", async (req, res) => {
 
     const user = await userlogin.findOne({ username: req.body.username })

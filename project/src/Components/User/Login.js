@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import img from '../../Assets/userlogologin.JPG';
 import imgs from '../../Assets/login.jpg'
 import axios from 'axios';
+import instance from '../../Utils/axios';
 function Login() {
   const [user, setUserName] = useState('')
   const [pwd, setPassword] = useState('')
@@ -18,7 +19,7 @@ function Login() {
     }
     else {
       const userlogin = async () => {
-        axios.post("http://localhost:3000/userlogin/verify", {
+        instance.post("/userlogin/verify", {
           username: user, password: pwd
         }).then((res) => {
           if (res.data) {

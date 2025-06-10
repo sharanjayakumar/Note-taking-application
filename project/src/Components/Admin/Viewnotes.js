@@ -4,17 +4,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import axios from 'axios'
 import Navbar from "./Navbar";
 import { Link } from 'react-router-dom';
+import instance from '../../Utils/axios';
 
 function Viewnotes() {
     const [data, setData] = useState([])
     const [search,setSearch]=useState([])
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get(`http://localhost:3000/viewnote?title=${search}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+       instance.get(`/viewnote?title=${search}`)
             .then((res) => {
                 setData(res.data);
                 console.log("Notes fetched:", res.data);
@@ -33,7 +30,7 @@ function Viewnotes() {
                 <div class="row">
                     {data.map((e) => (
                         <div className="col-lg-4 col-md-6 col-12 mb-3">
-                            <div class="card" style={{height: "350px"}}>
+                            <div class="card" style={{height: "400px"}}>
                                 <div class="card-body">
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>

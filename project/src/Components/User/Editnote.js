@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Nav from './Nav';
 import { useNavigate } from 'react-router-dom';
+import instance from '../../Utils/axios';
 function Editnote() {
     const {id} = useParams();
     const navigate = useNavigate();
@@ -12,11 +13,7 @@ function Editnote() {
     }
     useEffect(()=>{
         var token = localStorage.getItem("token")
-        axios.get(`http://localhost:3000/userviewnote/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+        instance.get(`/userviewnote/${id}`)
                 .then((res) => {
                     setData(res.data);
                     console.log("Notes fetched:", res.data);
@@ -27,10 +24,7 @@ function Editnote() {
     const editnote = async (id) => {
         try {
              var token = localStorage.getItem("token")
-            await axios.put(`http://localhost:3000/user-editnote/${id}`,data,
-                {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            await instance.put(`/user-editnote/${id}`,data);
              alert("Note updated successfully")
              navigate('/userviewnote')
         } 

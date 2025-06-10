@@ -2,15 +2,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import instance from '../../Utils/axios';
 
 function ViewDetailednotes() {
     const { id } = useParams();
     const [data,setData]=useState([])
     useEffect(()=>{
         const token=localStorage.getItem("token")
-       axios.get(`http://localhost:3000/viewnote/${id}`,{
-            headers:{Authorization:`Bearer ${token}`}
-        })
+       instance.get(`/viewnote/${id}`)
         .then((res)=>{
             setData(res.data)
         })
@@ -24,7 +23,7 @@ function ViewDetailednotes() {
 
     try {
         const token = localStorage.getItem("token");
-        await axios.delete(`http://localhost:3000/deletenote/${id}`, {
+        await instance.delete(`/deletenote/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         alert("Note deleted successfully");

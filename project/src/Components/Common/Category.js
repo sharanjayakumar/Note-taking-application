@@ -2,13 +2,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../Admin/Navbar'
+import instance from '../../Utils/axios'
 
 function Category({cat}) {
     const [datas,setDatas]=useState([])
      const [search,setSearch]=useState([])
     useEffect(()=>{
         const token=localStorage.getItem("token")
-        axios.get(`http://localhost:3000/category/${cat}/?title=${search}`,{
+        instance.get(`/category/${cat}/?title=${search}`,{
             headers:{Authorization:`Bearer ${token}`}
         })
         .then((res)=>{
@@ -24,7 +25,8 @@ function Category({cat}) {
         <div class="container">
                         <center><h1>NOTES</h1></center><br></br>
                         <div class="row">
-                            {datas.map((e) => (
+                            {datas.length > 0 ? 
+                            (datas.map((e) => (
                                 <div className="col-lg-4 col-md-6 col-12 mb-3">
                                     <div class="card" style={{height: "350px"}}>
                                         <div class="card-body">
@@ -40,8 +42,10 @@ function Category({cat}) {
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-        
+                            ))
+                        ):(
+                        <div><center><p>No result found</p></center></div>)
+                    }
                         </div>
                     </div>
     </div>
