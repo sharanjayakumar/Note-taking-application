@@ -4,6 +4,20 @@ const notes = require("../Model/notes")
 const savednotes = require("../Model/savednotes")
 const router = express.Router()
 
+var multer = require('multer');
+var path = require('path')
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'noteuploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+})
+
+var upload = multer({ storage: storage });
+
 router.get("/userviewnote", async (req, res) => {
     console.log(req.headers.authorization)
     if (req.headers.authorization) {
