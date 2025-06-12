@@ -6,7 +6,7 @@ import instance from "../../Utils/axios";
 
 function Addnotes() {
    const navigate=useNavigate();
-  const [data, setDatas] = useState({ title: "", subtitle: "", category: "", description: "" });
+  const [data, setDatas] = useState({ title: "", subtitle: "", category: "", description: "" ,image:null});
 
   const handleChange = (e) => {
     setDatas({ ...data, [e.target.name]: e.target.value });
@@ -15,22 +15,25 @@ function Addnotes() {
   const addnote = async () => {
     try {
       var token = localStorage.getItem("token");
-          await instance.post('/addnote', {
-          title: data.title,
-          subtitle: data.subtitle,
-          category: data.category,
-          description: data.description
-        });
+      const formData=new FormData
+      formData.append("title",data.title)
+      formData.append("subtitle",data.subtitle)
+      formData.append("category",data.category)
+      formData.append("description",data.description)
+      formData.append("image",data.image)
+          await instance.post('/addnote',formData,
+      {headers:{"Content-Type":"multipart/form-data"}});
         alert("Note added successfully");
-        setDatas({title:"",subtitle:"",category:"",description:""})
-       
-       
+        setDatas({title:"",subtitle:"",category:"",description:""}) 
     }
     catch(err){
       console.log("error", err);
       alert("Data not added");
     };
   };
+  const handleFile=(e)=>{
+    setDatas({ ...data,image:e.target.files[0]})
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", data);
@@ -96,7 +99,13 @@ function Addnotes() {
             name="description"
             onChange={handleChange}
           ></textarea>
-
+          <label htmlFor="image">IMAGE:</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            onChange={handleFile}
+          />
           <div className="button-group">
             <button type="submit" className="bttn">ADD</button>
             <Link to="/admin-dashboard">

@@ -7,7 +7,7 @@ import instance from '../../Utils/axios';
 function Editnotes() {
     const [data, setData] = useState({ title: "", subtitle: "", category: "", description: "" });
     const { id } = useParams();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -16,16 +16,24 @@ function Editnotes() {
     useEffect(() => {
         const token = localStorage.getItem("token");
         instance.get(`/viewnote/${id}`)
-        .then((res) => {
-            setData(res.data);
-            console.log("Notes fetched:", res.data);
-        });
+            .then((res) => {
+                setData(res.data);
+                console.log("Notes fetched:", res.data);
+            });
     }, [id]);
 
     const editnote = async (id) => {
         try {
             const token = localStorage.getItem("token");
-            await instance.put(`/editnote/${id}`, data);
+            const formData = new FormData()
+            formData.append("title", data.title)
+            formData.append("subtitle", data.subtitle)
+            formData.append("category", data.category)
+            formData.append("description", data.description)
+            formData.append("image", data.image)
+
+            await instance.put(`/editnote/${id}`, formData,{
+            headers: { 'Content-Type': 'multipart/form-data' }});
             alert("Note updated successfully");
             navigate('/admin-viewnote')
         } catch (err) {
@@ -33,6 +41,10 @@ function Editnotes() {
             alert("Data not updated");
         }
     };
+    const handleFile = (e) => {
+        setData({ ...data, image: e.target.files[0] })
+
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,36 +65,43 @@ function Editnotes() {
                     <label htmlFor="subtitle">SUB TITLE (optional):</label>
                     <input type="text" id="subtitle" name="subtitle" value={data.subtitle} onChange={handleChange} />
 
-                     <label>CATEGORY:</label>
-                        <div className="radio-group">
-                            <div>
-                                <input type="radio" id="c" value="C" name="category" onChange={handleChange} checked={data.category === "C"} />
-                                <label htmlFor="c">C</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="java" value="JAVA" name="category" onChange={handleChange} checked={data.category === "JAVA"}/>
-                                <label htmlFor="java">JAVA</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="python" value="PYTHON" name="category" onChange={handleChange} checked={data.category === "PYTHON"}/>
-                                <label htmlFor="python">PYTHON</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="html" value="HTML" name="category" onChange={handleChange} checked={data.category === "HTML"} />
-                                <label htmlFor="html">HTML</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="css" value="CSS" name="category" onChange={handleChange} checked={data.category === "CSS"} />
-                                <label htmlFor="css">CSS</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="js" value="JAVASCRIPT" name="category" onChange={handleChange} checked={data.category === "JAVASCRIPT"}/>
-                                <label htmlFor="js">JAVASCRIPT</label>
-                            </div>
+                    <label>CATEGORY:</label>
+                    <div className="radio-group">
+                        <div>
+                            <input type="radio" id="c" value="C" name="category" onChange={handleChange} checked={data.category === "C"} />
+                            <label htmlFor="c">C</label>
                         </div>
+                        <div>
+                            <input type="radio" id="java" value="JAVA" name="category" onChange={handleChange} checked={data.category === "JAVA"} />
+                            <label htmlFor="java">JAVA</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="python" value="PYTHON" name="category" onChange={handleChange} checked={data.category === "PYTHON"} />
+                            <label htmlFor="python">PYTHON</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="html" value="HTML" name="category" onChange={handleChange} checked={data.category === "HTML"} />
+                            <label htmlFor="html">HTML</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="css" value="CSS" name="category" onChange={handleChange} checked={data.category === "CSS"} />
+                            <label htmlFor="css">CSS</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="js" value="JAVASCRIPT" name="category" onChange={handleChange} checked={data.category === "JAVASCRIPT"} />
+                            <label htmlFor="js">JAVASCRIPT</label>
+                        </div>
+                    </div>
 
                     <label htmlFor="desc">DESCRIPTION:</label>
                     <textarea id="desc" name="description" value={data.description} onChange={handleChange} />
+                    <label htmlFor="image">IMAGE:</label>
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        onChange={handleFile}
+                    />
 
                     <div className="button-group">
                         <button type="submit" className="bttn">EDIT</button>

@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
     cb(null, 'noteuploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
+    cb(null, Date.now() + path.extname(file.originalname)) 
   }
 })
 
@@ -99,7 +99,7 @@ router.get("/viewuser", async (req, res) => {
     }
 
 })
-router.post("/addnote", async (req, res) => {
+router.post("/addnote",upload.single("image"), async (req, res) => {
     if (!req.headers.authorization) {
         return res.json({ message: "Unauthorised" })
     }
@@ -110,12 +110,12 @@ router.post("/addnote", async (req, res) => {
         title: req.body.title,
         subtitle: req.body.subtitle,
         category: req.body.category,
-        description: req.body.description, approved: true
+        description: req.body.description, approved: true,image:req.file ? req.file.filename : 'default.jpg' 
     })
     await newnote.save()
     res.send({ message: "successful" })
 })
-router.put("/editnote/:id", async (req, res) => {
+router.put("/editnote/:id",upload.single("image"),async (req, res) => {
     if (!req.headers.authorization) {
         return res.json({ message: "Unauthorised" })
     }
