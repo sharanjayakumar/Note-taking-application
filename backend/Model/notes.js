@@ -17,6 +17,7 @@ const noteSchema=mongoose.Schema({
     },
     approved:{
         type:Boolean,default:false
-    }
+    },
+    image:String
 })
 module.exports=mongoose.model("notes",noteSchema)
