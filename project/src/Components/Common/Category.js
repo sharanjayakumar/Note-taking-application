@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../Admin/Navbar'
 import instance from '../../Utils/axios'
+import noteimage from '../../Assets/defaultcopy.jpg'
 
 function Category({cat}) {
     const [datas,setDatas]=useState([])
@@ -28,8 +29,9 @@ function Category({cat}) {
                             {datas.length > 0 ? 
                             (datas.map((e) => (
                                 <div className="col-lg-4 col-md-6 col-12 mb-3">
-                                    <div class="card" style={{height: "350px"}}>
+                                    <div class="card" style={{height: "500px"}}>
                                         <div class="card-body">
+                                              <center><img src={e.image ? "http://localhost:3000/noteuploads/" + e.image : noteimage}  className="mx-auto" width="70px" height="70px" name="image"  alt="..."></img></center><br></br>
                                             <h2 class="card-title">{e.title}</h2>
                                             <h5>{e.subtitle}</h5>
                                             <p class="card-text">{e.description}..</p>
