@@ -123,7 +123,16 @@ router.put("/editnote/:id",upload.single("image"),async (req, res) => {
     const token = req.headers.authorization.slice(7)
     const data = jwt.verify(token, process.env.JWT_KEY);
     const cid = req.params.id;
-    let value = await notemodel.findByIdAndUpdate(cid, { title: req.body.title, subtitle: req.body.subtitle, category: req.body.category, description: req.body.description }, { new: true })
+     const noteimg = await notemodel.findById(data.id);
+            let updateData = {
+                title:req.body.title,
+                subtitle:req.body.subtitle,
+                category:req.body.category,
+                description:req.body.description,
+                image: req.file ? req.file.filename : noteimg.image
+            };
+           
+    let value = await notemodel.findByIdAndUpdate(cid,updateData,{ new: true })
     res.send(value)
 })
 router.delete("/deletenote/:id", async (req, res) => {

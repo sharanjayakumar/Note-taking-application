@@ -31,7 +31,7 @@ function Viewnotes() {
                 <div class="row">
                     {data.map((e) => (
                         <div className="col-lg-4 col-md-6 col-12 mb-3">
-                            <div class="card" style={{height: "500px"}}>
+                            <div class="card" style={{height: "500px"}}><br></br>
                                 <img src={e.image ? "http://localhost:3000/noteuploads/" + e.image : noteimage}  className="mx-auto" width="70px" name="image"  alt="..."></img>
                                 <div class="card-body">
                                     <h2 class="card-title">{e.title}</h2>
