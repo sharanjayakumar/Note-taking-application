@@ -13,9 +13,10 @@ function ViewnoteNav({setSearch}) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/dashboard">
             <img src={logo} alt="Logo" width="60" height="60" className="d-inline-block align-text-top" />
-          </Link>
+          <li class="nav-item px-2" style={{listStyleType:"none"}}>
+                    <Link  class="nav-link active" aria-current="page" to='/dashboard' style={{textDecoration:"none",color:"black"}}>HOME</Link>
+                  </li>
           <li style={{listStyle:"none"}} class="nav-item dropdown mx-4">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
