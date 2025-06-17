@@ -15,13 +15,14 @@ function Addnote() {
   const addnote = async () => {
     try {
       var token = localStorage.getItem("token");
-          await instance.post('/useraddnote', {
-          title: data.title,
-          subtitle: data.subtitle,
-          category: data.category,
-          description: data.description
-        });
-        alert("Note added successfully");
+      const formData=new FormData
+      formData.append("title",data.title)
+      formData.append("subtitle",data.subtitle)
+      formData.append("category",data.category)
+      formData.append("description",data.description)
+      formData.append("image",data.image)
+          await instance.post('/useraddnote',formData,{headers:{"Content-Type":"multipart/form-data"}});
+        alert("Note sent for validation");
         setDatas({title:"",subtitle:"",category:"",description:""})
 
     }
@@ -30,6 +31,9 @@ function Addnote() {
       alert("Data not added");
     };
   };
+   const handleFile=(e)=>{
+    setDatas({ ...data,image:e.target.files[0]})
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", data);
@@ -100,7 +104,13 @@ function Addnote() {
             onChange={handleChange}
             value={data.description}
           ></textarea>
-
+          <label htmlFor="image">IMAGE:</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            onChange={handleFile}
+          />
           <div className="button-group">
             <button type="submit" className="bttn">ADD</button>
             <Link to="/dashboard">

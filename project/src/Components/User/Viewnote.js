@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ViewnoteNav from './ViewnoteNav'
 import instance from '../../Utils/axios'
+import noteimage from '../../Assets/defaultcopy.jpg'
 
 function Viewnotes() {
     const [data, setData] = useState([])
@@ -29,7 +30,8 @@ function Viewnotes() {
                     {data.map((e) => (
                         <div className="col-lg-4 col-md-6 col-12 mb-3">
                             <div class="card">
-                                <div class="card-body" style={{height: "370px"}}>
+                                <div class="card-body" style={{height: "500px"}}>
+                                    <center><img src={e.image ? "http://localhost:3000/noteuploads/" + e.image : noteimage}  className="mx-auto" width="70px" height="70px" name="image"  alt="..."></img></center>
                                     <h2 class="card-title">{e.title}</h2>
                                     <h5>{e.subtitle}</h5>
                                     <p class="card-text">{e.description}</p>

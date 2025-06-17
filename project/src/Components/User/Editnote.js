@@ -24,7 +24,13 @@ function Editnote() {
     const editnote = async (id) => {
         try {
              var token = localStorage.getItem("token")
-            await instance.put(`/user-editnote/${id}`,data);
+             const formData = new FormData()
+            formData.append("title", data.title)
+            formData.append("subtitle", data.subtitle)
+            formData.append("category", data.category)
+            formData.append("description", data.description)
+            formData.append("image", data.image)
+            await instance.put(`/user-editnote/${id}`,formData, {headers: { 'Content-Type': 'multipart/form-data' }});
              alert("Note updated successfully")
              navigate('/userviewnote')
         } 
@@ -32,6 +38,10 @@ function Editnote() {
             console.log("error", err);
             alert("Data not updated");
         }; 
+    }
+    const handleFile = (e) => {
+        setData({ ...data, image: e.target.files[0] })
+
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -103,7 +113,13 @@ function Editnote() {
                             onChange={handleChange}
                             value={data.description}
                         ></textarea>
-
+                         <label htmlFor="image">IMAGE:</label>
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        onChange={handleFile}
+                    />
                         <div className="button-group">
                             <button type="submit" className="bttn">EDIT</button>
                             <Link to="/userviewnote">

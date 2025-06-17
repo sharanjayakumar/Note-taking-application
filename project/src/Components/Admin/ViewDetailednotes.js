@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import instance from '../../Utils/axios';
+import noteimage from '../../Assets/defaultcopy.jpg'
 
 function ViewDetailednotes() {
     const { id } = useParams();
@@ -41,8 +42,9 @@ function ViewDetailednotes() {
                         <div className="col-lg-12 col-md-6 col-12 mb-3">
                             <div class="card">
                                 <div class="card-body">
-                                    <h2 class="card-title">{data.title}</h2>
-                                    <h5>{data.subtitle}</h5>
+                                    <center><img src={data.image ? "http://localhost:3000/noteuploads/" + data.image : noteimage}  className="mx-auto" width="70px" height="70px" name="image"  alt="..."></img></center>
+                                    <center><h2 class="card-title">{data.title}</h2>
+                                    <h5>{data.subtitle}</h5></center>
                                     <p class="card-text">{data.description}</p>
                                     <p className="card-text">
                                         Posted by <strong>
