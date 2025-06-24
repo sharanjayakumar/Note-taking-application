@@ -9,8 +9,9 @@ import noteimage from '../../Assets/defaultcopy.jpg'
 
 function Viewmynotes() {
     const [data, setData] = useState([])
+     const [search,setSearch]=useState([])
     useEffect(() => {
-        instance.get('/userviewmynote')
+        instance.get(`/userviewmynote?title=${search}`)
             .then((res) => {
                 setData(res.data);
                 console.log("Notes fetched:", res.data);
@@ -18,10 +19,10 @@ function Viewmynotes() {
             .catch((err) => {
                 console.log("Error fetching notes:", err);
             });
-    }, []);
+    }, [search]);
     return (
         <div>
-            <ViewnoteNav/>
+            <ViewnoteNav setSearch = {setSearch}/>
             <div class="container">
                 <center><h1>NOTES</h1></center><br></br>
                 <div class="row">

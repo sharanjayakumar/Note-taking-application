@@ -60,6 +60,8 @@ router.get("/userviewmynote", async (req, res) => {
     let data = jwt.verify(token, process.env.JWT_KEY)
     console.log(data.username)
     console.log(data.id)
+    if(!req.query && !req.query.title)
+    {
     try {
         const note = await notes.find({user:data.id,approved:true}).populate("user", "username").select("-password")
         res.json(note)
@@ -67,6 +69,11 @@ router.get("/userviewmynote", async (req, res) => {
     catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });
     }
+}
+else{
+     const note = await notes.find({title:{$regex:req.query.title,$options:"i"},user:data.id,approved:true}).populate("user", "username").select("-password")
+        res.json(note)
+}
 
 });
 router.get("/userviewnote/:id", async (req, res) => {

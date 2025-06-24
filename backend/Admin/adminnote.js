@@ -215,5 +215,13 @@ router.get("/category/:cat", async (req, res) => {
     let value = await notemodel.find({ category: req.params.cat, title: { $regex: req.query.title, $options: "i" } }).populate("user", "username").select("-password");
     res.send(value);
 })
+router.get("/count",async (req,res)=>{
+    let [totalcount,usercount,admincount,countofusers]=await Promise.all([notemodel.countDocuments(),
+      notemodel.countDocuments({user:{$ne:null}}),
+      notemodel.countDocuments({user:null}),
+      viewuser.countDocuments()
+    ])
+    res.json({totalcount,usercount,admincount,countofusers})
+})
 
 module.exports = router;
