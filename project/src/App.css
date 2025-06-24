@@ -78,14 +78,28 @@ label{
   text-align: left;
  
 }
-.Dashboard{
+.Dashboard {
+  position: fixed; 
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background: url("https://wallpaperaccess.com/full/660601.jpg");
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:right;
+}
+
+/* .Dashboard{
   display: flex;
   height: 100vh;
   background: url("./Assets/note.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-}
+  overflow-y: hidden;
+} */
 .card-img-top{
   height:300px;
 }

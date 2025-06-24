@@ -7,7 +7,7 @@ function Dashboard() {
   return (
     <div>
       <Nav/>
-      <div className='Dashboard'>
+      <div className='Dashboard' style={{overflow:"hidden"}}>
             <div className='dash'>
               <ul>
                 <br></br>
