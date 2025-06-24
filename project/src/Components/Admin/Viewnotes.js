@@ -24,6 +24,7 @@ function Viewnotes() {
     }, [search]);
     
     return (
+        
         <div>
             <Navbar setSearch={setSearch} />
             <div class="container">
