@@ -216,12 +216,21 @@ router.get("/category/:cat", async (req, res) => {
     res.send(value);
 })
 router.get("/count",async (req,res)=>{
-    let [totalcount,usercount,admincount,countofusers]=await Promise.all([notemodel.countDocuments(),
+    let [totalcount,usercount,admincount,countofusers,categorycount]=await Promise.all([notemodel.countDocuments(),
       notemodel.countDocuments({user:{$ne:null}}),
       notemodel.countDocuments({user:null}),
-      viewuser.countDocuments()
+      viewuser.countDocuments(),
+      notemodel.aggregate([
+                {
+                        $group: {
+                        _id: "$category",
+                        totalNotes: { $sum: 1 }
+                    }
+                }
+            ])
+
     ])
-    res.json({totalcount,usercount,admincount,countofusers})
+    res.json({totalcount,usercount,admincount,countofusers,categorycount})
 })
 
 module.exports = router;

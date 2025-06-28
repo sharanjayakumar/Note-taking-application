@@ -3,23 +3,38 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { Link } from 'react-router-dom'
 import instance from '../../Utils/axios';
-import {PieChart,Pie, Tooltip, Legend} from 'recharts'
+import { PieChart, Pie, Tooltip, Legend } from 'recharts'
 
 function Dashboard() {
-  const [data,setData]=useState([])
-  useEffect(()=>{
-    instance.get("/count")
-    .then((res)=>{
-      setData(res.data)
+  const [data, setData] = useState([])
+  const [categoryData, setCategoryData] = useState([]);
+
+ useEffect(() => {
+   console.log("useEffect running...");
+  instance.get("/count")
+    .then((res) => {
+      console.log("Full Response:", res.data); // ADD THIS
+      
+      setData(res.data);
+
+      const categories = res.data.categorycount
+        ? res.data.categorycount.map((item ,index)=> ({
+            name: item._id,
+            value: item.totalNotes,
+            fill:colors[index]
+          }))
+        : [];
+
+      console.log("Parsed Categories:", categories); // ADD THIS
+      setCategoryData(categories);
     })
     .catch((err) => {
-                alert("No results found");
-                console.log(err)
-                
+      alert("No results found");
+      console.log(err);
     });
-  },[])
-  const data1=[{"name":"Adminnotes","value":data.admincount,"fill":"blue"},{"name":"Usernotes","value":data.usercount,"fill":"violet"}]
-
+}, []);
+  const colors=["red","blue","green","yellow","orange","darkblue"]
+  const data1 = [{ "name": "Adminnotes", "value": data.admincount, "fill": "blue" }, { "name": "Usernotes", "value": data.usercount, "fill": "green" }]
   return (
     <div className='Dashboard'>
       <div className='dash'>
@@ -65,37 +80,73 @@ function Dashboard() {
         </ul>
       </div>
       <br></br>
-      <div class="mx-auto " style={{width:"min-content"}}>
-      <div class='row mx-auto ' style={{marginTop:"50px"}}>
-        <div className="col-lg-4 col-md-6 col-12 mb-3">
-          <div class="card" style={{width:"18rem",marginRight:"70px"}}>
-            <div class="card-body">
-              <center><h5 class="card-title">Notes</h5></center>
-              <p class="card-text">Total notes : {data.totalcount}</p>
-              <p class="card-text">Admin notes:{data.admincount} </p>
-              <p class="card-text">User notes:{data.usercount} </p>
-            </div>
-          </div>
-          </div>
-          <div className="col-lg-4 col-md-6 col-12 mb-3">
-          <div class="card" style={{width:"18rem",marginLeft:"70px"}}>
-            <div class="card-body">
-              <h5 class="card-title">Users</h5>
-              <p class="card-text">No of users:{data.countofusers}</p>
-            </div>
-          </div>
-          </div>
-      </div>
-      <br></br>
-      <div style={{width:"min-content"}}>
-        <PieChart width={730} height={250}>
-  {/* <Pie data={data1} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={50} fill="#8884d8" /> */}
-  <Pie data={data1} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={0} outerRadius={80}  label />
-  <Tooltip />
-<Legend/>
-  </PieChart>
+      <div className="mx-auto" style={{ width: "min-content" }}>
+  <div className="row mx-auto" style={{ marginTop: "50px", gap: "20px" }}>
+    <div className="col-lg-4 col-md-6 col-12 mb-3">
+      <div className="card" style={{ width: "18rem", marginRight: "90px" }}>
+        <div className="card-body">
+          <center><h5 className="card-title">Notes</h5></center>
+          <p className="card-text">Total notes : {data.totalcount}</p>
+          <p className="card-text">Admin notes: {data.admincount} </p>
+          <p className="card-text">User notes: {data.usercount} </p>
+        </div>
       </div>
     </div>
+    <div className="col-lg-4 col-md-6 col-12 mb-3">
+      <div className="card" style={{ width: "18rem", marginLeft: "200px" }}>
+        <div className="card-body">
+          <h5 className="card-title">Users</h5>
+          <p className="card-text">No of users: {data.countofusers}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div className="row mx-auto" style={{ marginTop: "10px" }}>
+    <div className="col-lg-6 col-md-12 mb-4 d-flex justify-content-center">
+      <div style={{backgroundColor: "white", padding: "20px" ,width: "min-content"}}>
+        <PieChart width={350} height={300}>
+          <Pie
+            data={data1}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={0}
+            outerRadius={80}
+            label
+          />
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </div>
+    </div>
+    <div className="col-lg-6 col-md-12 mb-4 d-flex justify-content-center">
+      {categoryData.length > 0 ? (
+        <div style={{ backgroundColor: "white", padding: "20px 40px 20px 20px " }}>
+          <PieChart width={350} height={300}>
+            <Pie
+      data={categoryData}
+      dataKey="value"
+      nameKey="name"
+      cx="30%" 
+      cy="50%"
+      outerRadius={80}
+      label
+      fill="#8884d8"
+    ></Pie>
+            <Tooltip />
+            <Legend layout="vertical" 
+  verticalAlign="middle" 
+  align="right"  />
+          </PieChart>
+        </div>
+      ) : (
+        <p style={{ color: "white" }}>Loading chart data...</p>
+      )}
+    </div>
+  </div>
+</div>
     </div>
   )
 }
