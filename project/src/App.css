@@ -79,18 +79,15 @@ label{
  
 }
 .Dashboard {
-  position: fixed; 
-  left: 0;
   width: 100%;
-  height: 100vh;
-  overflow-y: auto;
+  min-height: 100vh;
   overflow-x: hidden;
-  display: flex;
   background: url("https://wallpaperaccess.com/full/660601.jpg");
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
 }
+
 
 /* .Dashboard{
   display: flex;
