@@ -57,7 +57,9 @@ function Detailedview() {
                                     <center><img src={data.image ? "http://localhost:3000/noteuploads/" + data.image : noteimage}  className="mx-auto" width="200px" height="200px" name="image"  alt="..."></img></center>
                                     <center><h2 class="card-title">{data.title}</h2>
                                     <h5>{data.subtitle}</h5></center>
-                                    <p class="card-text">{data.description}</p>
+                                    <center><p class="card-text"><b>Category: </b> {data.category}</p>
+                                    <p class="card-text">{data.description}</p></center>
+                                   
                                 </div>
                             </div>
                         </div>
