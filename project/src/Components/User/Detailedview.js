@@ -58,7 +58,6 @@ function Detailedview() {
                                     <center><h2 class="card-title">{data.title}</h2>
                                     <h5>{data.subtitle}</h5></center>
                                     <p class="card-text">{data.description}</p>
-                                   
                                 </div>
                             </div>
                         </div>

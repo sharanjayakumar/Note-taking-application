@@ -180,4 +180,10 @@ router.delete("/delete-savednote/:id",async(req,res)=>{
     const delsaved=await savednotes.deleteOne({_id:req.params.id}).exec()
     res.send({message:"Unsaved"})
 })
+router.get("/usercount",async (req,res)=>{
+    const token = req.headers.authorization.slice(7);
+    const data = jwt.verify(token, process.env.JWT_KEY);
+    const count=await notes.countDocuments({user:data.id})
+    res.json(count)
+})
 module.exports = router;
