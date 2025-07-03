@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import { Link } from 'react-router-dom'
@@ -13,7 +13,7 @@ function Dashboard() {
    console.log("useEffect running...");
   instance.get("/count")
     .then((res) => {
-      console.log("Full Response:", res.data); // ADD THIS
+      console.log("Full Response:", res.data);
       
       setData(res.data);
 
@@ -25,7 +25,7 @@ function Dashboard() {
           }))
         : [];
 
-      console.log("Parsed Categories:", categories); // ADD THIS
+      console.log("Parsed Categories:", categories);
       setCategoryData(categories);
     })
     .catch((err) => {
@@ -80,7 +80,7 @@ function Dashboard() {
         </ul>
       </div>
       <br></br>
-      <div className="mx-auto" style={{ width: "min-content" }}>
+      <div className="mx-auto" style={{ width: "60%" }}>
   <div className="row mx-auto" style={{ marginTop: "50px", gap: "20px" }}>
     <div className="col-lg-4 col-md-6 col-12 mb-3">
       <div className="card" style={{ width: "18rem", marginRight: "90px" }}>
@@ -102,7 +102,7 @@ function Dashboard() {
     </div>
   </div>
  
-  <div className="row mx-auto" style={{ marginTop: "10px" }}>
+  <div className="row mx-auto w-100" style={{ marginTop: "10px" }}>
     <div className="col-lg-6 col-md-12 mb-4 d-flex justify-content-center">
       <div style={{backgroundColor: "white", padding: "20px" ,width: "min-content"}}>
         <PieChart width={350} height={300}>
@@ -129,16 +129,16 @@ function Dashboard() {
       data={categoryData}
       dataKey="value"
       nameKey="name"
-      cx="30%" 
+      cx="50%" 
       cy="50%"
       outerRadius={80}
       label
       fill="#8884d8"
     ></Pie>
             <Tooltip />
-            <Legend layout="vertical" 
-  verticalAlign="middle" 
-  align="right"  />
+            <Legend layout="horizontal" 
+  verticalAlign="bottom" 
+  align="center" width={250} />
           </PieChart>
         </div>
       ) : (
