@@ -32,7 +32,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className='container-fluid Dashboard'>
+    <div className='container-fluid Dashboard'style={{ height: "100vh" }} >
       <div className='row'>
         <div className='col-md-3 bg-black'>
           <ul className='list-unstyled p-3'><br></br>
@@ -107,7 +107,7 @@ function Dashboard() {
             </div>
             <div className="col-lg-6 col-12">
               {categoryData.length > 0 ? (
-                <div className="bg-white p-1 rounded shadow text-center" style={{ width: "100%",paddingLeft:"25px" }}><br></br>
+                <div className="bg-white p-1 rounded shadow text-center" style={{ width: "100%",paddingLeft:"25px"}}><br></br>
                   <h6><b>Category Wise Note Count</b></h6>
                   <PieChart width={350} height={250}>
                     <Pie
@@ -131,7 +131,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <br></br>
     </div>
   );
 }
