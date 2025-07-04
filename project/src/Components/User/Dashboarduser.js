@@ -29,13 +29,13 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="Dashboard"style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="Dashboard"style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
       <div style={{ width: "100%" }}>
         <Nav />
       </div>
       <div className="container-fluid flex-grow-1" style={{ padding: 0 }}>
-        <div className="row m-0" >
-          <div className="col-md-3 bg-dark text-white p-3">
+        <div className="row m-0 h-100 flex-grow-1" >
+          <div className="col-md-3 bg-dark text-white p-3 md-h-100">
             <h4 className='text-center'><b>DASHBOARD</b></h4><br></br>
             <ul className='list-unstyled'>
               <li className="mb-3"><Link to="/viewmynote" className="text-decoration-none text-light">📄 VIEW MY NOTES</Link></li>
@@ -44,7 +44,7 @@ function Dashboard() {
               <li className="mb-3"><Link to="/savednotes" className="text-decoration-none text-light">📄 VIEW SAVED NOTES</Link></li>
             </ul>
           </div>
-          <div className="col-md-9 p-4">
+          <div className="col-md-9 p-4 h-100">
             <div className="row g-4">
               <div className="col-md-4">
                 <div className="card text-center">

@@ -191,10 +191,4 @@ router.get("/usercount", async (req, res) => {
     ])
     res.json({ count, savedcount, categorycount })
 })
-router.get("/usercount",async (req,res)=>{
-    const token = req.headers.authorization.slice(7);
-    const data = jwt.verify(token, process.env.JWT_KEY);
-    const count=await notes.countDocuments({user:data.id})
-    res.json(count)
-})
 module.exports = router;
