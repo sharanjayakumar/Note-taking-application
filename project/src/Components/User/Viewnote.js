@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import ViewnoteNav from './ViewnoteNav'
 import instance from '../../Utils/axios'
 import noteimage from '../../Assets/defaultcopy.jpg'
+import NavCategory from './Navcategory'
 
 function Viewnotes() {
     const [data, setData] = useState([])
@@ -23,7 +24,7 @@ function Viewnotes() {
     }, [search]);
     return (
         <div>
-            <ViewnoteNav setSearch = {setSearch}/>
+            <NavCategory setSearch = {setSearch}/>
             <div class="container">
                 <center><h1>NOTES</h1></center><br></br>
                 <div class="row">
@@ -39,7 +40,7 @@ function Viewnotes() {
                                     <p className='card-text'>
                                         Posted by <strong>{e.user? e.user?.username:"admin"}</strong>
                                     </p>
-                                    <Link to={`/userdetailednote/${e._id}`} class="btn btn-primary">View more</Link>
+                                    <Link to={`/userdetailednote/${e._id}`}  class="btn btn-primary">View more</Link>
                                 </div>
                             </div>
                         </div>

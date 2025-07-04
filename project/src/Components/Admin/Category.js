@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from '../Admin/Navbar'
+import Navbar from './Navbar'
 import instance from '../../Utils/axios'
 import noteimage from '../../Assets/defaultcopy.jpg'
 

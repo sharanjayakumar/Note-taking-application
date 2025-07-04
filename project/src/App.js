@@ -20,11 +20,12 @@ import Validatenotes from './Components/Admin/Validatenotes';
 import Detailedview from './Components/User/Detailedview';
 import Viewprofile from './Components/User/Viewprofile';
 import Editprofile from './Components/User/Editprofile';
-import Category from './Components/Common/Category';
+import Category from './Components/Admin/Category';
 import Savenotes from './Components/User/Savenotes';
 import Viewmynotes from './Components/User/Viewmynote';
 import Otp from './Components/User/Otp';
 import Resetpass from './Components/User/Resetpass';
+import Categories from './Components/User/Categories';
 
 function App() {
   return (
@@ -50,6 +51,12 @@ function App() {
         <Route path='/userdetailednote/:id' element={<Detailedview></Detailedview>}></Route>
         <Route path='/viewprofile' element={<Viewprofile></Viewprofile>}></Route>
         <Route path='/editprofile' element={<Editprofile></Editprofile>}></Route>
+        <Route path='/categoryuser/c' element={<Categories cat="C"/>} ></Route>
+        <Route path='/categoryuser/java' element={<Categories cat="JAVA"/>} ></Route>
+        <Route path='/categoryuser/python' element={<Categories cat="PYTHON"/>} ></Route>
+        <Route path='/categoryuser/html' element={<Categories cat="HTML"/>} ></Route>
+        <Route path='/categoryuser/css' element={<Categories cat="CSS"/>} ></Route>
+        <Route path='/categoryuser/javascript' element={<Categories cat="JAVASCRIPT"/>} ></Route>
         <Route path='/category/c' element={<Category cat="C"></Category>}></Route>
         <Route path='/category/java' element={<Category cat="JAVA"></Category>}></Route>
         <Route path='/category/python' element={<Category cat="PYTHON"></Category>}></Route>

@@ -1,11 +1,12 @@
 import React from 'react'
 import axios from 'axios'
-import { Link,useParams } from 'react-router-dom'
+import { Link,useLocation,useNavigate,useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Nav from './Nav'
 import instance from '../../Utils/axios'
 import noteimage from '../../Assets/defaultcopy.jpg'
 function Detailedview() {
+    const navigate=useNavigate()
     const { id } = useParams()
     const [data, setData] = useState([])
     useEffect(() => {
@@ -72,7 +73,8 @@ function Detailedview() {
                 {data.user? <Link class="btn btn-primary" to={`/usereditnote/${data._id}`} style={{marginLeft:"20px"}}>EDIT</Link>:<p></p>}
                 {data.user? <button onClick={()=>userdelete(data._id)} className="btn btn-primary" to='/usereditnote' style={{marginLeft:"20px"}}>DELETE</button>:<p></p>}
                <button class="btn btn-primary" style={{marginLeft:"20px"}} onClick={()=>savednote(data._id)} >SAVE</button>
-                <Link to='/userviewnote' class="btn btn-primary" style={{marginLeft:"20px"}}>BACK</Link>
+                <button onClick={() => navigate(-1)} className="btn btn-primary"  style={{marginLeft:"20px"}}>BACK</button>
+
             </center> 
         </div>
   )

@@ -23,12 +23,13 @@ function ViewnoteNav({setSearch}) {
               CATEGORIES
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><Link to={'/category/c'} class="dropdown-item" style={{ textDecoration: "none" }}>C</Link></li>
-              <li><Link to={'/category/java'} class="dropdown-item" >JAVA</Link></li>
-              <li><Link to={"/category/python"} class="dropdown-item">PYTHON</Link></li>
-              <li><Link to={'/category/html'} class="dropdown-item">HTML</Link></li>
-              <li><Link to={'/category/css'} class="dropdown-item">CSS</Link></li>
-              <li><Link to={'/category/javascript'} class="dropdown-item">JAVASCRIPT</Link></li>
+              <li><Link to={'/categoryuser/c'} class="dropdown-item" style={{ textDecoration: "none" }}>C</Link></li>
+              <li><Link to={'/categoryuser/java'} class="dropdown-item" >JAVA</Link></li>
+              <li><Link to={"/categoryuser/python"} class="dropdown-item">PYTHON</Link></li>
+              <li><Link to={'/categoryuser/html'} class="dropdown-item">HTML</Link></li>
+              <li><Link to={'/categoryuser/css'} class="dropdown-item">CSS</Link></li>
+              <li><Link to={'/categoryuser/javascript'} class="dropdown-item">JAVASCRIPT</Link></li>
+               <li><Link to={'/viewmynote' } class="dropdown-item">ALL NOTES</Link></li>
             </ul>
           </li>
 

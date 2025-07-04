@@ -141,6 +141,18 @@ router.delete("/userdeletenote/:id", async (req, res) => {
         res.send(err)
     }
 })
+router.get("/categoryuser/:cat", async (req, res) => {
+    if (!req.headers.authorization) {
+        res.status(400).json({ message: "error" })
+        return;
+
+    }
+    const token = req.headers.authorization.slice(7)
+    console.log(token)
+    let data = jwt.verify(token, process.env.JWT_KEY)
+    let value = await notes.find({ user:data.id,category: req.params.cat, title: { $regex: req.query.title, $options: "i" } }).populate("user", "username").select("-password");
+    res.send(value);
+})
 router.post("/savenote/:id", async (req, res) => {
     if (!req.headers.authorization) {
         return res.status(401).json({ message: "Unauthorized" });
@@ -191,10 +203,5 @@ router.get("/usercount", async (req, res) => {
     ])
     res.json({ count, savedcount, categorycount })
 })
-router.get("/usercount",async (req,res)=>{
-    const token = req.headers.authorization.slice(7);
-    const data = jwt.verify(token, process.env.JWT_KEY);
-    const count=await notes.countDocuments({user:data.id})
-    res.json(count)
-})
+
 module.exports = router;

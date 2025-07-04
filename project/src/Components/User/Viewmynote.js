@@ -38,7 +38,7 @@ function Viewmynotes() {
                                     <p className='card-text'>
                                         Posted by <strong>{e.user? e.user?.username:"admin"}</strong>
                                     </p>
-                                    <Link to={`/userdetailednote/${e._id}`} class="btn btn-primary">View more</Link>
+                                    <Link to={`/userdetailednote/${e._id}`}  class="btn btn-primary">View more</Link>
                                 </div>
                             </div>
                         </div>
