@@ -56,31 +56,44 @@ function Validatenotes() {
             <br />
             <center><h1>VALIDATE NOTES</h1></center>
             <br />
-            {data.map((e) => (
-                <div className="col-lg-4 col-md-6 col-12 mb-3 mx-5">
-                    <div class="card">
-                        <div class="card-body" style={{height: "200px"}}>
-                             <center><img src={data.image ? "http://localhost:3000/noteuploads/" + data.image : noteimage}  className="mx-auto" width="70px" height="70px" name="image"  alt="..."></img></center>
-                            <h2 class="card-title">{e.title}</h2>
-                            <h5>{e.subtitle}</h5>
-                            <p class="card-text">{e.description}..</p>
-                            <p className="card-text">
-                                Posted by <strong>
-                                    {e.user ? e.user?.username : "Admin"}
-                                </strong>
-                            </p>
-                        </div>
-                        <br></br>
-                        <br></br>
-                        <div className="button-group">
-                            <button type="submit" className="bttn mx-3" onClick={() => approve(e._id)}>ACCEPT</button>
-                            <button type="submit" className="bttn" onClick={() => reject(e._id)} >REJECT</button>
-                        </div>
-                        <br></br>
-                    </div>
-                </div>
+            {data.length === 0 ? (
+  <div className="text-center my-5">
+    <h4>No Notes Available to Validate</h4>
+  </div>
+) : (
+  data.map((e) => (
+    <div className="col-lg-4 col-md-6 col-12 mb-3 mx-3" key={e._id}>
+      <div className="card">
+        <div className="card-body" style={{ height: "200px" }}>
+          <center>
+            <img
+              src={e.image ? "http://localhost:3000/noteuploads/" + e.image : noteimage}
+              className="mx-auto"
+              width="70px"
+              height="70px"
+              alt="..."
+            />
+          </center>
+          <h2 className="card-title">{e.title}</h2>
+          <h5>{e.subtitle}</h5>
+          <p className="card-text">{e.description}..</p>
+          <p className="card-text">
+            Posted by <strong>{e.user ? e.user.username : "Admin"}</strong>
+          </p>
+        </div>
+        <div className="d-flex justify-content-center mb-3">
+          <button type="button" className="bttn mx-2" onClick={() => approve(e._id)}>
+            ACCEPT
+          </button>
+          <button type="button" className="bttn mx-2" onClick={() => reject(e._id)}>
+            REJECT
+          </button>
+        </div>
+      </div>
+    </div>
+  ))
+)}
 
-            ))}
         </div>
     )
 }

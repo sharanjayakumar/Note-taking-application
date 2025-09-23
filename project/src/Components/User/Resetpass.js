@@ -58,7 +58,7 @@ function Resetpass() {
         />
         <br></br>
         <button type="submit" className="btn btn-primary">RESET PASSWORD</button>
-        <Link class="btn btn-primary" to={"/login"} style={{ marginLeft: "20px" }}>BACK</Link>
+        <Link class="btn btn-primary" to={"/"} style={{ marginLeft: "20px" }}>BACK</Link>
       </form></center>
 
     </div>

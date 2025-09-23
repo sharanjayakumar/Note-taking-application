@@ -32,7 +32,7 @@ function App() {
     <BrowserRouter>
     <div className="App">
       <Routes>
-        <Route path="/login"  element={<Login/>}></Route>
+        <Route path="/"  element={<Login/>}></Route>
         <Route path='/admin-login' element={<Loginpage/>}></Route>
         <Route path='/admin-dashboard' element={<Dashboard/>} ></Route>
         <Route path='/admin-viewnote' element={<Viewnotes/>} ></Route>

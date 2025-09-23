@@ -35,7 +35,7 @@ function Dashboard() {
       </div>
       <div className="container-fluid flex-grow-1" style={{ padding: 0 }}>
         <div className="row m-0" >
-          <div className="col-md-3 bg-dark text-white p-3">
+          <div className="col-md-3 bg-dark text-white p-3" style={{ height: '100vh' }}>
             <h4 className='text-center'><b>DASHBOARD</b></h4><br></br>
             <ul className='list-unstyled'>
               <li className="mb-3"><Link to="/viewmynote" className="text-decoration-none text-light">📄 VIEW MY NOTES</Link></li>

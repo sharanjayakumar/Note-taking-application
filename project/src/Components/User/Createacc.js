@@ -22,7 +22,7 @@ function Createacc() {
     await instance.post('/userlogin/register',formData,
       {headers:{"Content-Type":"multipart/form-data"}})
       alert("User added successfully")
-      navigate("/login")
+      navigate("/")
     }
     catch{
       alert("Error")
@@ -98,10 +98,10 @@ function Createacc() {
         </form>
         <div className="button-group"> 
       <button className='w-25 butn' style={{backgroundColor:'blue',color:'white',marginLeft:"160px"}} variant="primary" type="submit">
-        <Link to='/login'></Link>
+        <Link to='/'></Link>
         Create account
       </button>
-        <Link to='/login'><button className='w-50 butn' style={{backgroundColor:'blue',color:'white',marginLeft:"100px"}} variant="primary" type="submit"> Back </button></Link> 
+        <Link to='/'><button className='w-50 butn' style={{backgroundColor:'blue',color:'white',marginLeft:"100px"}} variant="primary" type="submit"> Back </button></Link> 
      </div><br></br>
     </form>
     </div>
