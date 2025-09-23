@@ -29,7 +29,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="Dashboard"style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="Dashboard"style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
       <div style={{ width: "100%" }}>
         <Nav />
       </div>
@@ -44,7 +44,7 @@ function Dashboard() {
               <li className="mb-3"><Link to="/savednotes" className="text-decoration-none text-light">📄 VIEW SAVED NOTES</Link></li>
             </ul>
           </div>
-          <div className="col-md-9 p-4">
+          <div className="col-md-9 p-4 h-100">
             <div className="row g-4">
               <div className="col-md-4">
                 <div className="card text-center">
